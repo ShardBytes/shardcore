@@ -21,11 +21,14 @@ class CoreServer {
 						port = 443
 					}
 
-					connectors = arrayOf(sslConnector)
+					val httpConnector = ServerConnector(this).apply {
+						port = 80
+					}
+
+					connectors = arrayOf(sslConnector, httpConnector)
 
 				}
 			})
-			.port(443)
 			.enableStaticFiles("static", Location.EXTERNAL)
 
 	init {
