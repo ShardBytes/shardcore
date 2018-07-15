@@ -18,7 +18,7 @@ class CoreServer {
 					}
 
 					val httpConnector = ServerConnector(this).apply {
-						port = 8080
+						port = 80
 					}
 
 					connectors = arrayOf(sslConnector, httpConnector)
