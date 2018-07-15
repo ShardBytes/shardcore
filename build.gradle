@@ -28,3 +28,13 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+// setup jar
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName // set main class of jar ( we've set it already for app plugin )
+    }
+
+    // add the whole compiled tree to jar
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
