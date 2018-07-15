@@ -5,7 +5,6 @@ import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
-import java.util.*
 
 class CoreServer {
 
@@ -19,7 +18,7 @@ class CoreServer {
 					}
 
 					val httpConnector = ServerConnector(this).apply {
-						port = 80
+						port = 8080
 					}
 
 					connectors = arrayOf(sslConnector, httpConnector)
@@ -29,8 +28,6 @@ class CoreServer {
 			.enableStaticFiles("static", Location.EXTERNAL)
 
 	init {
-
-		app.start()
 
 		// redirect address to https
 		app.before {
@@ -63,6 +60,8 @@ class CoreServer {
 				sess.send(msg)
 			}
 		}
+
+		app.start()
 
 	}
 
