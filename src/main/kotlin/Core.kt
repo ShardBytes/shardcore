@@ -13,8 +13,6 @@ class CoreServer {
 
 	}
 
-
-
 }
 
 fun main(args: Array<String>) {
