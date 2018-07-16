@@ -1,10 +1,11 @@
-import data.RandomREST
 import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
+import rest.FruitRest
+import rest.RandomRest
 import java.io.File
 
 class CoreServer {
@@ -43,7 +44,8 @@ class CoreServer {
 		}
 
 		// REST
-		app.get("/random", RandomREST(app))
+		app.get("/random", RandomRest())
+		app.get("/fruit", FruitRest())
 
 		// websockets
 		app.ws("/") {
