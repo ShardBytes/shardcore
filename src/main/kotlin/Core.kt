@@ -10,6 +10,8 @@ import java.io.File
 
 class CoreServer {
 
+	val mongo = Mongo()
+
 	val app = Javalin.create()
 			.embeddedServer(EmbeddedJettyFactory {
 				Server().apply {
@@ -45,7 +47,7 @@ class CoreServer {
 
 		// REST
 		app.get("/random", RandomRest())
-		app.get("/fruit", FruitRest())
+		app.get("/fruit", FruitRest(mongo))
 
 		// websockets
 		app.ws("/") {

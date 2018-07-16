@@ -3,15 +3,20 @@ import com.mongodb.ServerAddress
 import org.litote.kmongo.KMongo
 import java.io.File
 
-val mongoClient = KMongo.createClient(
-		ServerAddress(File("mongo.host").readText()),
-		mutableListOf<MongoCredential>(
-				MongoCredential.createCredential(
-						"faggot",
-						"admin",
-						File("mongo.password").readText().toCharArray()
-				)
-		)
-)
+class Mongo {
 
-val dbDemo = mongoClient.getDatabase("demo")
+	val mongoClient = KMongo.createClient(
+			ServerAddress(File("mongo.host").readText(), 27017),
+			listOf<MongoCredential>(
+					MongoCredential.createCredential(
+							"faggot",
+							"admin",
+							File("mongo.password").readText().toCharArray().apply { println(this) }
+					)
+			)
+	)
+
+	val dbDemo = mongoClient.getDatabase("demo")
+
+}
+
