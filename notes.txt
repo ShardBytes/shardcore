@@ -1,1 +1,11 @@
+deploy -> git pull gradle build run
+
 ufw rules ->  /etc/ufw/before.rules
+
+REUQIRE -> ports.txt with ports ie """
+80
+443
+"""
+
+
+REQUIRE -> mongo.password with mongo passwd ( gitignored )

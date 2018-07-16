@@ -5,6 +5,7 @@ import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
+import java.io.File
 
 class CoreServer {
 
@@ -12,13 +13,15 @@ class CoreServer {
 			.embeddedServer(EmbeddedJettyFactory {
 				Server().apply {
 
+					val ports = File("ports.txt").readLines()
+
 					// setup jetty
 					val sslConnector = ServerConnector(this, getSslContextFactory()).apply {
-						port = 443
+						port = ports[0].toInt()
 					}
 
 					val httpConnector = ServerConnector(this).apply {
-						port = 80
+						port = ports[1].toInt()
 					}
 
 					connectors = arrayOf(sslConnector, httpConnector)
