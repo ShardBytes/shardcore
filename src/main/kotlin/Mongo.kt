@@ -4,7 +4,7 @@ import org.litote.kmongo.KMongo
 import java.io.File
 
 val mongoClient = KMongo.createClient(
-		ServerAddress("shardbytes.ddns.net"),
+		ServerAddress(File("mongo.host").readText()),
 		mutableListOf<MongoCredential>(
 				MongoCredential.createCredential(
 						"faggot",
