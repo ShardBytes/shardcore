@@ -9,6 +9,7 @@ REQUIRE -> ports.txt with ports i.e.
 10080
 ===========
 REQUIRE -> mongo.password with mongo passwd ( gitignored )
+REQUIRE -> mongo.host with mongo database host address
 
 // NEED TO RECONFIGURE FIREWALL PORTFORWARDING
 // so we dont run java with sudo
