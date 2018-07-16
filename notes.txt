@@ -3,12 +3,11 @@
 
 deploy -> git pull gradle build run
 
-REUQIRE -> ports.txt with ports ie """
+REQUIRE -> ports.txt with ports i.e.
+===========
 80
 443
-"""
-
-
+===========
 REQUIRE -> mongo.password with mongo passwd ( gitignored )
 
 
