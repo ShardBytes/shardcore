@@ -17,11 +17,11 @@ class CoreServer {
 
 					// setup jetty
 					val sslConnector = ServerConnector(this, getSslContextFactory()).apply {
-						port = ports[0].toInt()
+						port = ports[1].toInt()
 					}
 
 					val httpConnector = ServerConnector(this).apply {
-						port = ports[1].toInt()
+						port = ports[0].toInt()
 					}
 
 					connectors = arrayOf(sslConnector, httpConnector)
