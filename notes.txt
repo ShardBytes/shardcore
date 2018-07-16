@@ -5,13 +5,14 @@ deploy -> git pull gradle build run
 
 REQUIRE -> ports.txt with ports i.e.
 ===========
-80
-443
+10443
+10080
 ===========
 REQUIRE -> mongo.password with mongo passwd ( gitignored )
 
-
-ufw rules ->  /etc/ufw/before.rules =========( to top of file )==============
+// NEED TO RECONFIGURE FIREWALL PORTFORWARDING
+// so we dont run java with sudo
+ufw rules ->  /etc/ufw/before.rules =========( !! to top of file )==============
 
 *nat
 :PREROUTING ACCEPT [0:0]
