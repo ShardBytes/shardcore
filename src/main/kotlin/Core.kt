@@ -34,7 +34,10 @@ class CoreServer {
 
 		// redirect address to https
 		app.before {
+			println("@[${it.request().method}] <${it.request().remoteAddr}> ${it.url()}")
+
 			if (it.port() == 80) { // disallow port 80 requests
+				println("[REDIRECT] Redirecting ${it.request().remoteAddr} to https ...")
 				it.redirect(it.url().replace("http://", "https://"), 301) // 301 status->moved permanently
 			}
 		}
