@@ -14,7 +14,6 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/) an
 ```
 git pull
 gradle build
-./run
 ```
 
 ### RECONFIGURE FIREWALL PORTFORWARDING

@@ -1,21 +1,142 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>flip is fadget</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Mallanna" rel="stylesheet">
+
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+  <!-- STYLES -->
+  <link rel="stylesheet" type="text/css" href="/assets/lib/fancybox/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/assets/lib/toast/android_toast.min.css" type="text/css">
+
+  <link rel="stylesheet" href="/assets/css/core.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- SCRIPTS -->
+  <script src="/assets/lib/toast/android_toast.min.js"></script>
+  <script src="/assets/lib/scrollTo/jquery.scrollTo.min.js"></script>
+  <script src="/assets/lib/fancybox/jquery.fancybox.min.js"></script>
+
 </head>
-<body>
 
-<h1>Filip is a faggot</h1>
-<h5>(welcome to ShardBytes)</h5>
+<body class="bg-darkblue">
+  <nav class="navbar navbar-expand-md navbar-dark bg-darkerblue">
+    <a class="navbar-brand" href="">ShardBytes</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbarMd">
+      <span class="navbar-toggler-icon "></span>
+    </button>
+    <div class="navbar-collapse collapse" id="collapsingNavbarMd">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-info" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/about">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/learn">Learn</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-<p><a href="/random">Random number REST</a></p>
-<p><a href="/fruit">Internal authenticated MongoDB Query REST</a></p>
+  <div id="bigimage" class="bg"></div>
 
-<p>thymeleaf test : randomNumber -> <span th:text="${randomNumber}"/> </p>
-<div>
-	<p> name = <span th:text="${user.name}"/> </p>
-	<p> age = <span th:text="${user.age}"/> </p>
-</div>
+  <div id="maincontent" class="container text-light">
+
+    <p th:text="${randomNumber}"/>
+
+    <p class="text-light mallana bigger">
+      We are a group of programmers from Slovakia and we try our best to make
+      interesting applications, ranging from office software to games.
+    </p>
+    <br>
+
+    <h1 class="text-light mallana">
+      Check out our products:
+    </h1>
+
+    <h4 class="text-light mallana">
+      A Light in the Void
+    </h4>
+
+    <a href="https://dummyimage.com/600x400/000/00ff2b.png" data-fancybox="alitv" data-caption="A Light in the Void #1">
+      <img src="https://dummyimage.com/100x67/000/00ff2b.png" alt=""/>
+    </a>
+
+    <a href="https://dummyimage.com/600x400/000/ffae00.png" data-fancybox="alitv" data-caption="A Light in the Void #2">
+      <img src="https://dummyimage.com/100x67/000/ffae00.png" alt=""/>
+    </a>
+
+    <p class="text-light mallana big">
+      Android(soon) and Browser game written in Java and HTML5 where you have
+      to destroy your enemies and get the last star.
+    </p>
+    <br>
+
+    <h4 class="text-light mallana">
+      Library Book Scanner
+    </h4>
+
+    <a href="https://dummyimage.com/600x400/000/00ff2b.png" data-fancybox="lbs" data-caption="Library Book Scanner #1">
+      <img src="https://dummyimage.com/100x67/000/00ff2b.png" alt=""/>
+    </a>
+
+    <a href="https://dummyimage.com/600x400/000/ffae00.png" data-fancybox="lbs" data-caption="Library Book Scanner #2">
+      <img src="https://dummyimage.com/100x67/000/ffae00.png" alt=""/>
+    </a>
+
+    <p class="text-light mallana big">
+      A simple book managing database software, that shows you who has which
+      book in a simple interface.
+    </p>
+    <br>
+
+    <h4 class="text-light mallana">
+      Kešuľap Timer
+    </h4>
+
+    <a href="https://dummyimage.com/600x400/000/00ff2b.png" data-fancybox="kt" data-caption="Timer #1">
+      <img src="https://dummyimage.com/100x67/000/00ff2b.png" alt=""/>
+    </a>
+
+    <a href="https://dummyimage.com/600x400/000/ffae00.png" data-fancybox="kt" data-caption="Timer #2">
+      <img src="https://dummyimage.com/100x67/000/ffae00.png" alt=""/>
+    </a>
+
+    <p class="text-light mallana big">
+      One of our two timer apps, that we made as a request from someone.
+    </p>
+    <br>
+
+    <h4 class="text-light mallana">
+      Hello, cruel world
+    </h4>
+
+    <a href="https://dummyimage.com/600x400/000/00ff2b.png" data-fancybox="hcw" data-caption="Hello, cruel world #1">
+      <img src="https://dummyimage.com/100x67/000/00ff2b.png" alt=""/>
+    </a>
+
+    <a href="https://dummyimage.com/600x400/000/ffae00.png" data-fancybox="hcw" data-caption="Hello, cruel world #2">
+      <img src="https://dummyimage.com/100x67/000/ffae00.png" alt=""/>
+    </a>
+
+    <p class="text-light mallana big">
+      Our first (and probably last) attempt at making a game in Unity engine.
+    </p>
+    <br>
+  </div>
+
+  <script src="scroll.js"></script>
 
 </body>
 </html>

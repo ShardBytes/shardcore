@@ -1,0 +1,14 @@
+body, html{
+  height: 100%;
+  margin: 0;
+}
+
+.bigimage{
+  background-image: url("/assets/transplanetbig.png");
+  /* TODO: replace with an image of ourselves */
+  height: 50%;
+  /* TODO: check if 35-45% wouldn't look better */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

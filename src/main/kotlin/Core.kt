@@ -3,11 +3,9 @@ import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import io.javalin.translator.template.JavalinThymeleafPlugin
-import model.User
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
-import org.thymeleaf.TemplateEngine
 import rest.FruitRest
 import rest.RandomRest
 import templates.IndexTemplate
@@ -60,8 +58,9 @@ class CoreServer(private val config: CoreConfig) {
 		// setup mongo
 		mongo = Mongo(config.mongoHost, config.mongoUserName, config.mongoPassword)
 		
-		// setup thymeleaf plugin
-		JavalinThymeleafPlugin.configure(TemplateEngine())
+		// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
+		JavalinThymeleafPlugin.configure(FileTemplateEngine())
+		
 		
 		// redirect address to https
 		app.before {
