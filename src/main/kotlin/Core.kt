@@ -13,6 +13,8 @@ import websocket.RootEchoWS
 import java.io.File
 
 data class CoreConfig(
+		// devmode
+		val devMode: Boolean,
 		// ports
 		val port: Int,
 		val sslPort: Int,
@@ -59,7 +61,8 @@ class CoreServer(private val config: CoreConfig) {
 		mongo = Mongo(config.mongoHost, config.mongoUserName, config.mongoPassword)
 		
 		// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
-		JavalinThymeleafPlugin.configure(FileTemplateEngine())
+		// also if in devmode, turn off cache
+		JavalinThymeleafPlugin.configure(FileTemplateEngine(!config.devMode))
 		
 		// redirect address to https
 		app.before {
@@ -91,6 +94,7 @@ class CoreServer(private val config: CoreConfig) {
 		app.start()
 		
 		println("===== JAVALIN STARTED =====")
+		if (config.devMode) println(">>> DEVELOPMENT MODE ACTIVE <<<")
 		
 	}
 	

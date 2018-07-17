@@ -2,7 +2,7 @@ import org.thymeleaf.TemplateEngine
 import org.thymeleaf.templatemode.TemplateMode
 import org.thymeleaf.templateresolver.FileTemplateResolver
 
-class FileTemplateEngine : TemplateEngine() {
+class FileTemplateEngine(cacheActive: Boolean) : TemplateEngine() {
 	
 	init {
 		// by default Javalin uses StringTemplateResolver, so I switch to File templates as its more useful
@@ -11,7 +11,7 @@ class FileTemplateEngine : TemplateEngine() {
 			prefix = ""
 			templateMode = TemplateMode.HTML
 			cacheTTLMs = 3600000L
-			isCacheable = false
+			isCacheable = cacheActive
 		})
 	}
 	
