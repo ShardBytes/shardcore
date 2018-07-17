@@ -63,9 +63,9 @@ class CoreServer(private val config: CoreConfig) {
 		
 		// redirect address to https
 		app.before {
-			println("@[${it.request().method}] <${it.request().remoteAddr}> ${it.url()}")
+			println("@[${it.request().method}] <${it.request().remoteAddr}> <${it.port()}> ${it.url()}")
 			
-			if (it.port() == config.port) { // disallow port non ssl port requests
+			if (it.port() == 80 || it.port() == config.port) { // disallow port non ssl port requests
 				println("[REDIRECT] Redirecting ${it.request().remoteAddr} to https ...")
 				it.redirect(it.url().replace("http://", "https://"), 301) // 301 status->moved permanently
 			}
