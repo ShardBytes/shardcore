@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.databind.util.JSONPObject
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
@@ -107,15 +106,21 @@ class CoreServer(private val config: CoreConfig) {
 
 fun main(args: Array<String>) {
 	
+	var configPath = "config.json"
+	
+	if (args.size > 0) {
+		configPath = args[0]
+	} else {
+		println("< no config file argument specified, using default config.json >")
+	}
+	
 	val config: CoreConfig
 	
 	try {
-		
-		val jsonMapper = jacksonObjectMapper()
-		val configJson = File("config.json").readText()
-		config = jsonMapper.readValue(configJson, CoreConfig::class.java)
-		
-	} catch (ex: Exception) {
+		val configJson = File(configPath).readText()
+		config = jacksonObjectMapper().readValue(configJson, CoreConfig::class.java)
+	}
+	catch (ex: Exception) {
 		println("======= FAILED TO LOAD CONFIG =========")
 		ex.printStackTrace()
 		println("=======================================")
