@@ -1,6 +1,6 @@
 # ShardCore is our main JVM server for our page
 
-## -> [shardbytes.com](https://s)
+## -> [shardbytes.com](https://shardbytes.com)
 
 Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/) and similar stuff. Writen in Kotlin.
 
