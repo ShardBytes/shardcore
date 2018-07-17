@@ -76,9 +76,6 @@ class CoreServer(private val config: CoreConfig) {
 		
 		// TEMPLATES
 		app.get("/index.html", IndexTemplate())
-		app.post("/") {
-			
-		}
 		
 		
 		// REST
