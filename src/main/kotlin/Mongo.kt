@@ -2,15 +2,17 @@ import com.mongodb.MongoCredential
 import com.mongodb.ServerAddress
 import org.litote.kmongo.KMongo
 
-class Mongo {
+class Mongo(val host: String,
+            userName: String,
+            password: String) {
 
 	val mongoClient = KMongo.createClient(
-			ServerAddress(getNoSpaceFileText("mongo.host"), 27017),
+			ServerAddress(host, 27017),
 			listOf<MongoCredential>(
 					MongoCredential.createCredential(
-							"faggot",
+							userName,
 							"admin",
-							getNoSpaceFileText("mongo.password").toCharArray()
+							password.toCharArray()
 					)
 			)
 	)
