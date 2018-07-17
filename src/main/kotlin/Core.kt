@@ -3,12 +3,14 @@ import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import io.javalin.translator.template.JavalinThymeleafPlugin
+import model.User
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
 import org.thymeleaf.TemplateEngine
 import rest.FruitRest
 import rest.RandomRest
+import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
 
@@ -72,12 +74,12 @@ class CoreServer(private val config: CoreConfig) {
 		}
 		
 		
-		// TEMPLATE ROUTING
-		app.get("/index.html") {
-			it.routeStaticThymeleaf(mapOf(
-					"randomNumber" to Math.random()
-			))
+		// TEMPLATES
+		app.get("/index.html", IndexTemplate())
+		app.post("/") {
+			
 		}
+		
 		
 		// REST
 		app.get("/random", RandomRest())
