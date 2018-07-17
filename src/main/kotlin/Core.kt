@@ -61,7 +61,6 @@ class CoreServer(private val config: CoreConfig) {
 		// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
 		JavalinThymeleafPlugin.configure(FileTemplateEngine())
 		
-		
 		// redirect address to https
 		app.before {
 			println("@[${it.request().method}] <${it.request().remoteAddr}> <${it.port()}> ${it.url()}")

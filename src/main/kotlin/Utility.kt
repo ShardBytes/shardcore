@@ -7,6 +7,7 @@ fun noWhiteSpace(text: String)
 
 
 // routes the path using thymeleaf
+// works only with StringTemplateResolver
 fun Context.routeStaticThymeleaf(model: Map<String, Any?>) {
 	val file = File("static/${path()}")
 	if (file.exists()) {
