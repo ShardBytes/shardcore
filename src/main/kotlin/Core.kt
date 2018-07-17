@@ -2,11 +2,14 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
+import io.javalin.translator.template.JavalinThymeleafPlugin
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
+import org.thymeleaf.TemplateEngine
 import rest.FruitRest
 import rest.RandomRest
+import websocket.RootEchoWS
 import java.io.File
 
 data class CoreConfig(
@@ -25,14 +28,16 @@ data class CoreConfig(
 class CoreServer(private val config: CoreConfig) {
 	
 	val app = Javalin.create()
+			// setup jetty
 			.embeddedServer(EmbeddedJettyFactory {
 				Server().apply {
 					
-					// setup jetty
+					// https connector
 					val sslConnector = ServerConnector(this, getSslContextFactory()).apply {
 						port = config.sslPort
 					}
 					
+					// http connector
 					val httpConnector = ServerConnector(this).apply {
 						port = config.port
 					}
@@ -53,6 +58,9 @@ class CoreServer(private val config: CoreConfig) {
 		// setup mongo
 		mongo = Mongo(config.mongoHost, config.mongoUserName, config.mongoPassword)
 		
+		// setup thymeleaf plugin
+		JavalinThymeleafPlugin.configure(TemplateEngine())
+		
 		// redirect address to https
 		app.before {
 			println("@[${it.request().method}] <${it.request().remoteAddr}> ${it.url()}")
@@ -63,30 +71,24 @@ class CoreServer(private val config: CoreConfig) {
 			}
 		}
 		
+		
+		// TEMPLATE ROUTING
+		app.get("/index.html") {
+			it.routeStaticThymeleaf(mapOf(
+					"randomNumber" to Math.random()
+			))
+		}
+		
 		// REST
 		app.get("/random", RandomRest())
 		app.get("/fruit", FruitRest(mongo))
 		
-		// websockets
-		app.ws("/") {
-			it.onConnect {
-				println("${it.remoteAddress} connected")
-				if (!it.isSecure) {
-					println("${it.remoteAddress} unsecure !! closing ws")
-					it.close()
-					it.disconnect()
-				} else {
-					println("${it.remoteAddress} SECURE, keeping connection wss")
-				}
-			}
-			
-			it.onClose { sess, _, _ ->
-				println("${sess.remoteAddress} closed")
-			}
-			
-			it.onMessage { sess, msg ->
-				sess.send(msg)
-			}
+		// WEBSOCKETS
+		app.ws("/", RootEchoWS())
+		
+		// ERRORS
+		app.error(404) {
+			it.html(File("static/notFound.html").readText())
 		}
 		
 		app.start()

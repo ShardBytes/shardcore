@@ -26,6 +26,9 @@ dependencies {
 
     // kmongo
     compile 'org.litote.kmongo:kmongo:3.8.0'
+    
+    // thymelefa
+    compile 'org.thymeleaf:thymeleaf:3.0.9.RELEASE'
 
     //testCompile group: 'junit', name: 'junit', version: '4.12'
 }
