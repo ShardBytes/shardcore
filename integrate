@@ -1,4 +1,4 @@
-# Go to your crontab and >>>  cd <this dir> && ./integrate &>> logs/ci.txt
+#!/bin/bash
 ./screenstop
 ./deploy
 ./screenrun

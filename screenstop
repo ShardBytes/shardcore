@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Sending interrupt signal to shardcore in shardcore screen"
 screen -S shardcore -X stuff ^C
 echo "Done"

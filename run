@@ -1,1 +1,2 @@
+#!/bin/bash
 java -jar build/libs/shardcore-1.0.jar |& tee logs/teelog.txt

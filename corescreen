@@ -1,8 +1,9 @@
+#!/bin/bash
 # RUN THIS INSIDE ShardCore folder
 echo "Creating ShardCore screen session with current directory ..."
 screen -dmS shardcore
-echo "Changing screen directory to this directory .. ."
-screen -S shardcore -X stuff cd $PWD$'\n'
+echo "Changing screen directory to this directory ..."
+screen -S shardcore -X stuff cd $PWD^M
 echo "- Current screens -"
 screen -ls
 echo "Done"

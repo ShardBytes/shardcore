@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Starting shardcore through shardcore screen"
-screen -S shardcore -X stuff $'./run\n'
+screen -S shardcore -X stuff ./run^M
 echo "Done"
