@@ -1,4 +1,5 @@
 #!/bin/bash
-./screenstop
 ./deploy
+./screenstop
+sleep 1
 ./screenrun
