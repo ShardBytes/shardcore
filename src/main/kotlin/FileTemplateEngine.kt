@@ -5,7 +5,7 @@ import org.thymeleaf.templateresolver.FileTemplateResolver
 class FileTemplateEngine(cacheActive: Boolean) : TemplateEngine() {
 	
 	init {
-		// by default Javalin uses StringTemplateResolver, so I switch to File templates as its more useful
+		// by default Javalin uses ClassLoaderTemplateResolver, so I switch to File templates as its more useful
 		setTemplateResolver(FileTemplateResolver().apply {
 			suffix = ".html"
 			prefix = ""
