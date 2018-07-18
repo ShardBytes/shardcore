@@ -1,9 +1,8 @@
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.javalin.ApiBuilder.*
 import io.javalin.Javalin
-import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import io.javalin.translator.template.JavalinThymeleafPlugin
+import org.eclipse.jetty.http.MimeTypes
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
@@ -12,6 +11,7 @@ import rest.RandomRest
 import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
+import java.io.FileInputStream
 
 data class CoreConfig(
 		// devmode
@@ -57,9 +57,9 @@ class CoreServer(private val config: CoreConfig) {
 				}
 			})
 			
-			// static files
-			enableStaticFiles("static", Location.EXTERNAL)
-			enableStaticFiles("logs", Location.EXTERNAL)
+			// static files -> NOPE, route them manually
+			//enableStaticFiles("static", Location.EXTERNAL)
+			// enableStaticFiles("logs", Location.EXTERNAL)
 			
 			// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
 			// also if in devmode, turn off cache
@@ -75,7 +75,8 @@ class CoreServer(private val config: CoreConfig) {
 		
 		
 		// setup routes
-		app.routes {
+		// last routed = first checked
+		app.apply {
 			
 			// redirect to https
 			before {
@@ -87,14 +88,45 @@ class CoreServer(private val config: CoreConfig) {
 				}
 			}
 			
-			path("/") {
-				// core
-				get("index.html", IndexTemplate())
+			
+			// core
+			get("/", IndexTemplate())
+			
+			// apps
+			get("/random", RandomRest())
+			get("/fruit", FruitRest(mongo))
+			ws("/", RootEchoWS())
+			
+			// custom static routing by Plasmoxy, NEEDS TO BE AFTER API ROUTING !
+			get("/*") {
+				val splat = it.splat(0) ?: "" // get route
+				val reqfile = File("static/$splat") // grab file matching route
 				
-				// apps
-				get("random", RandomRest())
-				get("fruit", FruitRest(mongo))
-				ws("", RootEchoWS())
+				if (reqfile.exists()) { // check if exists
+					
+					// different processing for directory and files
+					if (reqfile.isDirectory()) {
+						// if directory, render thymeleaf and serve index.html
+						val index = File("static/$splat/index.html")
+						if (index.exists()) {
+							println("-> serving thymeleaf index.html of /$splat")
+							it.renderThymeleaf(index.path, mapOf()) // render empty thymeleaf
+							// ( this wont be executed if something else was routed here before ofc )
+						} else {
+							it.status(404)
+						}
+					} else {
+						// if file, patch header MIME type and serve file through stream
+						val type = MimeTypes.getDefaultMimeByExtension(reqfile.path)
+						println("serve file -> ${reqfile.path} [$type]")
+						it.contentType(type) // ULTRA IMPORTANT, http header needs the serve mime type matching !!!!
+						it.result(FileInputStream(reqfile))
+					}
+					
+				} else {
+					it.status(404)
+				}
+				
 			}
 			
 		}
