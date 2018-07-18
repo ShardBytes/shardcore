@@ -3,12 +3,12 @@ var hasClicc = false;
 setTimeout(function(){
   if(!hasClicc){
     new Android_Toast({
-      content: "Touch the planet !",
+      content: "Touch the planet!",
       duration: 3000,
       position: "bottom"
     });
   }
-}, 1000);
+}, 5000);
 
 $("#bigimage").click(function(){
   hasClicc = true;
