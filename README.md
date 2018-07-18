@@ -10,11 +10,16 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 ( or specify java argument with config file path in ./run )
 ( see configTemplate.json )
 
-### Deploy ( ./deploy )
-```
-git pull
-gradle build
-```
+### How to deploy ?
+- ./deploy -> it will git pull and build
+
+### Custom CI ->
+- start shardcore screen with ./corescreen ( stop all existing shardcore screens )
+- run ./integrate inside shardcore directory and it will 1. interrupt server 2. deploy 3. run server
+- therefore you can have crontab like this :
+	```
+	0 * * * * cd <sharcore dir> && ./integrate &> logs/ci.txt
+	```
 
 ### RECONFIGURE FIREWALL PORTFORWARDING
 - https://linuxacademy.com/howtoguides/posts/show/topic/11630-internal-port-forwarding-on-linux-using-the-firewall
