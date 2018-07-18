@@ -18,7 +18,7 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 - run ./integrate inside shardcore directory and it will 1. interrupt server 2. deploy 3. run server
 - therefore you can have crontab like this :
 	```
-	0 * * * * cd <shardcore dir> && ./integrate &> logs/ci.txt
+	0 * * * * cd /home/faggot/shardcore && ./integrate |& tee logs/ci.txt
 	```
 
 ### RECONFIGURE FIREWALL PORTFORWARDING
