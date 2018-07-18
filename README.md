@@ -2,7 +2,7 @@
 
 ## -> [shardbytes.com](https://shardbytes.com)
 
-Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/) and similar stuff. Writen in Kotlin.
+Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), Thymeleaf and similar stuff. Writen in Kotlin.
 
 ## **Notes**
 

@@ -87,7 +87,15 @@ class CoreServer(private val config: CoreConfig) {
 			}
 			
 			path("/") {
+				// core
 				get("index.html", IndexTemplate())
+				get("teelog") {
+					it.result(File("logs/teelog.txt").run {
+						if (exists()) readText() else "No teelog.txt"
+					})
+				}
+				
+				// apps
 				get("random", RandomRest())
 				get("fruit", FruitRest(mongo))
 				ws("", RootEchoWS())
