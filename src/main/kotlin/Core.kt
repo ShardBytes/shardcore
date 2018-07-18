@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import io.javalin.ApiBuilder.*
 import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
@@ -29,9 +30,16 @@ data class CoreConfig(
 
 class CoreServer(private val config: CoreConfig) {
 	
-	val app = Javalin.create()
+	val mongo: Mongo
+	val app: Javalin
+	
+	init {
+		
+		// setup Javalin
+		app = Javalin.create().apply {
+			
 			// setup jetty
-			.embeddedServer(EmbeddedJettyFactory {
+			embeddedServer(EmbeddedJettyFactory {
 				Server().apply {
 					
 					// https connector
@@ -48,52 +56,52 @@ class CoreServer(private val config: CoreConfig) {
 					
 				}
 			})
-			.enableStaticFiles("static", Location.EXTERNAL)
-			.apply {
-				println("==== JAVALIN INITIALIZED ====")
-			}
-	
-	val mongo: Mongo
-	
-	init {
+			
+			// static files
+			enableStaticFiles("static", Location.EXTERNAL)
+			
+			// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
+			// also if in devmode, turn off cache
+			JavalinThymeleafPlugin.configure(FileTemplateEngine(!config.devMode))
+			
+			start()
+			println("==== JAVALIN STARTED ====")
+			
+		}
 		
 		// setup mongo
 		mongo = Mongo(config.mongoHost, config.mongoUserName, config.mongoPassword)
 		
-		// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
-		// also if in devmode, turn off cache
-		JavalinThymeleafPlugin.configure(FileTemplateEngine(!config.devMode))
 		
-		// redirect address to https
-		app.before {
-			println("@[${it.request().method}] <${it.request().remoteAddr}> <${it.port()}> ${it.url()}")
+		// setup routes
+		app.routes {
 			
-			if (it.port() == 80 || it.port() == config.port) { // disallow port non ssl port requests
-				println("[REDIRECT] Redirecting ${it.request().remoteAddr} to https ...")
-				it.redirect(it.url().replace("http://", "https://"), 301) // 301 status->moved permanently
+			// redirect to https
+			before {
+				println("@[${it.request().method}] <${it.request().remoteAddr}> <${it.port()}> ${it.url()}")
+				
+				if (it.port() == 80 || it.port() == config.port) { // disallow port non ssl port requests
+					println("[REDIRECT] Redirecting ${it.request().remoteAddr} to https ...")
+					it.redirect(it.url().replace("http://", "https://"), 301) // 301 status->moved permanently
+				}
 			}
+			
+			path("/") {
+				get("index.html", IndexTemplate())
+				get("random", RandomRest())
+				get("fruit", FruitRest(mongo))
+				ws("", RootEchoWS())
+			}
+			
 		}
-		
-		
-		// TEMPLATES
-		app.get("/index.html", IndexTemplate())
-		
-		
-		// REST
-		app.get("/random", RandomRest())
-		app.get("/fruit", FruitRest(mongo))
-		
-		// WEBSOCKETS
-		app.ws("/", RootEchoWS())
 		
 		// ERRORS
 		app.error(404) {
 			it.html(File("static/notFound.html").readText())
+			println("@[ERROR] [${it.status()}] ${it.path()}")
 		}
 		
-		app.start()
-		
-		println("===== JAVALIN STARTED =====")
+		println("===== ROUTING DONE =====")
 		if (config.devMode) println(">>> DEVELOPMENT MODE ACTIVE <<<")
 		
 	}
