@@ -6,9 +6,11 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 
 ## **Notes**
 
-**To run server one needs to specify configuration in config.json**
-( or specify java argument with config file path in ./run )
-( see configTemplate.json )
+- **To run server one needs to specify configuration in config.json**
+	- ( or specify java argument with config file path in ./run )
+	- ( see configTemplate.json )
+
+**Create static and logs directories because the server serves them statically (or Javalin will rage)**
 
 ### How to deploy ?
 - ./deploy -> it will git pull and build

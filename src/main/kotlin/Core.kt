@@ -59,6 +59,7 @@ class CoreServer(private val config: CoreConfig) {
 			
 			// static files
 			enableStaticFiles("static", Location.EXTERNAL)
+			enableStaticFiles("logs", Location.EXTERNAL)
 			
 			// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
 			// also if in devmode, turn off cache
@@ -89,11 +90,6 @@ class CoreServer(private val config: CoreConfig) {
 			path("/") {
 				// core
 				get("index.html", IndexTemplate())
-				get("teelog") {
-					it.result(File("logs/teelog.txt").run {
-						if (exists()) readText() else "No teelog.txt"
-					})
-				}
 				
 				// apps
 				get("random", RandomRest())
