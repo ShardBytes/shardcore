@@ -1,1 +1,1 @@
-java -jar build/libs/shardcore-1.0.jar
+java -jar build/libs/shardcore-1.0.jar |& tee logs/teelog.txt
