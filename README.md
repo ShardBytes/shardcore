@@ -22,6 +22,7 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 	```
 	0 * * * * cd <shardcore dir> && ./integrate >> logs/ci.txt 2>&1
 	```
+    and it will rebuild every hour and restart the server in screen container
 
 ### RECONFIGURE FIREWALL PORTFORWARDING
 - https://linuxacademy.com/howtoguides/posts/show/topic/11630-internal-port-forwarding-on-linux-using-the-firewall
