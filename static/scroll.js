@@ -8,7 +8,7 @@ setTimeout(function(){
       position: "bottom"
     });
   }
-}, 5000);
+}, 1000);
 
 $("#bigimage").click(function(){
   hasClicc = true;
