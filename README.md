@@ -16,11 +16,11 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 - ./deploy -> it will git pull and build
 
 ### Custom CI ->
-- start shardcore screen with ./corescreen ( stop all existing shardcore screens )
-- run ./integrate inside shardcore directory and it will 1. interrupt server 2. deploy 3. run server
+- start shardcore screen with ./corescreen in ShardCore directory ( stop all existing shardcore screens )
+- run ./integrate inside shardcore directory and it will 1. interrupt server 2. deploy 3. run server ( the shardcore screen needs to be running )
 - therefore you can have crontab like this :
 	```
-	0 * * * * cd /home/faggot/shardcore && ./integrate |& tee logs/ci.txt
+	0 * * * * cd <shardcore dir> && ./integrate >> logs/ci.txt 2>&1
 	```
 
 ### RECONFIGURE FIREWALL PORTFORWARDING
