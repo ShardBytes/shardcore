@@ -1,2 +1,3 @@
 #!/bin/bash
+echo -e "======= RUN $(date) ======="
 java -jar build/libs/shardcore-1.0.jar |& tee logs/teelog.txt

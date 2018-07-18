@@ -1,3 +1,5 @@
 #!/bin/bash
+echo -e "\n======= ShardCore Deploy $(date) ======="
 git pull
 gradle build
+echo -e "\n======= DONE DEPLOYING $(date) ======="
