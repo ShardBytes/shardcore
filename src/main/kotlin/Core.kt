@@ -98,7 +98,7 @@ class CoreServer(private val config: CoreConfig) {
 			ws("/", RootEchoWS())
 			
 			// custom static routing by Plasmoxy, NEEDS TO BE AFTER API ROUTING !
-			// TODO: fix this when tipsy releases my patch PR
+			// TODO: fix this when @tipsy releases my patch PR
 			get("/*") {
 				val splat = it.splat(0) ?: "" // get route
 				val reqfile = File("static/$splat") // grab file matching route
