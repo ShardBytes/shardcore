@@ -2,13 +2,18 @@ import io.javalin.Context
 import io.javalin.Handler
 import org.thymeleaf.TemplateEngine
 
-class CacheResetREST(private val engine: TemplateEngine) : Handler {
+// uses REST path parameter :key
+class CacheResetREST(private val engine: TemplateEngine,
+                     private val cacheResetKey: String) : Handler {
 	
 	override fun handle(ctx: Context) {
 		
-		engine.clearTemplateCache()
-		ctx.result("ok cache reset")
+		if (cacheResetKey == ctx.param("key")) {
+			engine.clearTemplateCache()
+			ctx.result("ok cache cleared")
+		} else {
+			ctx.result("error wrong key")
+		}
 		
 	}
-	
 }

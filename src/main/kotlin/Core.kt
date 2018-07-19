@@ -14,8 +14,6 @@ import websocket.RootEchoWS
 import java.io.File
 
 data class CoreConfig(
-		// devmode
-		val devMode: Boolean,
 		// ports
 		val port: Int,
 		val sslPort: Int,
@@ -25,7 +23,9 @@ data class CoreConfig(
 		// mongo
 		val mongoHost: String,
 		val mongoUserName: String,
-		val mongoPassword: String
+		val mongoPassword: String,
+		// thyme
+		val cacheResetKey: String
 )
 
 class CoreServer(private val config: CoreConfig) {
@@ -95,7 +95,7 @@ class CoreServer(private val config: CoreConfig) {
 				
 				// core
 				get("", IndexTemplate())
-				get("resetCache", CacheResetREST(thymeleaf))
+				get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
 				
 				get("random", RandomRest())
 				get("fruit", FruitRest(mongo))
@@ -118,7 +118,6 @@ class CoreServer(private val config: CoreConfig) {
 		}
 		
 		println("===== ROUTING DONE =====")
-		if (config.devMode) println(">>> DEVELOPMENT MODE ACTIVE <<<")
 		
 	}
 	
