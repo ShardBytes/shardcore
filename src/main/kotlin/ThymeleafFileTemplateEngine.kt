@@ -2,7 +2,7 @@ import org.thymeleaf.TemplateEngine
 import org.thymeleaf.templatemode.TemplateMode
 import org.thymeleaf.templateresolver.FileTemplateResolver
 
-class FileTemplateEngine(cacheActive: Boolean) : TemplateEngine() {
+class ThymeleafFileTemplateEngine(cacheActive: Boolean) : TemplateEngine() {
 	
 	init {
 		// by default Javalin uses ClassLoaderTemplateResolver, so I switch to File templates as its more useful
