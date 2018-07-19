@@ -63,7 +63,7 @@ class CoreServer(private val config: CoreConfig) {
 			
 			// setup thymeleaf plugin with CUSTOM TEPMPLATE ENGINE
 			// also if in devmode, turn off cache
-			JavalinThymeleafPlugin.configure(FileTemplateEngine(!config.devMode))
+			JavalinThymeleafPlugin.configure(FileTemplateEngine(false))
 			
 			start()
 			println("==== JAVALIN STARTED ====")
