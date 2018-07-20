@@ -52,3 +52,13 @@ jar {
     // add the whole compiled tree to jar
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
+
+task distribute(dependsOn: build, type: Copy) {
+    from "build/libs/"
+    into "dist/"
+    include "shardcore-${version}.jar"
+    rename("shardcore-${version}.jar", "shardcore-latest.jar")
+}
+configure(distribute) {
+    group = "application"
+}
