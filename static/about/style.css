@@ -4,7 +4,7 @@ body, html{
 }
 
 .bigimage{
-  background-image: url("/assets/transplanetbig.png");
+  background-image: url("/assets/img/transplanetbig.png");
   /* TODO: replace with an image of ourselves */
   height: 50%;
   /* TODO: check if 35-45% wouldn't look better */
