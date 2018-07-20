@@ -36,7 +36,7 @@ class CoreServer(private val config: CoreConfig) {
 	
 	init {
 		
-		thymeleaf = ThymeleafFileTemplateEngine(true)
+		thymeleaf = ThymeleafFileTemplateEngine(false)
 		
 		// setup Javalin
 		app = Javalin.create().apply {
@@ -95,7 +95,7 @@ class CoreServer(private val config: CoreConfig) {
 				
 				// core
 				get("", IndexTemplate())
-				get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
+				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
 				
 				get("random", RandomRest())
 				get("fruit", FruitRest(mongo))
