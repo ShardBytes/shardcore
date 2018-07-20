@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- include corehead -->
-  <div th:replace="templates/corehead :: corehead"/>
+  <title>About</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="./style.css">
+  <!-- chrome color -->
+  <meta name="theme-color" content="#21252b">
+
+  <!-- core FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Mallanna" rel="stylesheet">
+
+  <!-- core BOOTSTRAP -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+  <!-- core styles -->
+  <link rel="stylesheet" href="/assets/css/core.css">
+
+  <!-- custom -->
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body class="bg-darkblue">
+  
   <nav class="navbar navbar-expand-md navbar-dark bg-darkerblue">
     <a class="navbar-brand" href="">ShardBytes</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbarMd">
@@ -20,10 +38,10 @@
           <a class="nav-link text-light" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-info" href="/src/aboutUs">About us</a>
+          <a class="nav-link text-info" href="/aboutUs/">About us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="/src/learn">Learn</a>
+          <a class="nav-link text-light" href="/learn/">Learn</a>
         </li>
       </ul>
     </div>

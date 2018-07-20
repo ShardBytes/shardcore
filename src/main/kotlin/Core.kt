@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.javalin.ApiBuilder.path
 import io.javalin.Javalin
+import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import io.javalin.translator.template.JavalinThymeleafPlugin
 import org.eclipse.jetty.server.Server
@@ -26,8 +27,7 @@ data class CoreConfig(
 		val mongoPassword: String,
 		// thyme
 		val cacheActive: Boolean,
-		val cacheResetKey: String,
-		val enableBufferedStream: Boolean
+		val cacheResetKey: String
 )
 
 class CoreServer(private val config: CoreConfig) {
@@ -62,12 +62,10 @@ class CoreServer(private val config: CoreConfig) {
 				}
 			})
 			
-			// static files -> but beware of trailing slash !
-			// enableStaticFiles("static", Location.EXTERNAL)
-			// enableStaticFiles("logs", Location.EXTERNAL)
-			
 			// setup thymeleaf plugin
 			JavalinThymeleafPlugin.configure(thymeleaf)
+			
+			enableStaticFiles("static", Location.EXTERNAL)
 			
 			start()
 			println("==== JAVALIN STARTED ====")
@@ -96,20 +94,19 @@ class CoreServer(private val config: CoreConfig) {
 			path("/") {
 				
 				// core
-				get("", IndexTemplate())
+				get("/", IndexTemplate())
 				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
 				
 				get("random", RandomRest())
 				get("fruit", FruitRest(mongo))
 				
+				get("/greet/:name/:age") {
+					it.html("Hello, my name is ${it.param("name")} and I got ${it.param("age")} yrs.")
+				}
+				
 				ws("", RootEchoWS())
 				
 			}
-			
-			// custom static routing by Plasmoxy, NEEDS TO BE AFTER API ROUTING !
-			// TODO: fix this when @tipsy releases my patch PR
-			// and may actually not cus I like thymeleaf now
-			get("/*", StaticFileHandler(config.enableBufferedStream))
 			
 		}
 		
