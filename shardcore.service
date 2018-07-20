@@ -1,0 +1,14 @@
+[Unit]
+Description=ShardCore service
+After=netowkr.target mongod.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=jenkins
+ExecStart=/var/lib/jenkins/workspace/shardcore/run
+
+[Install]
+WantedBy=multi-user.target
