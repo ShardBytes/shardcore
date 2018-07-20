@@ -4,8 +4,9 @@ import org.eclipse.jetty.http.MimeTypes
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileInputStream
+import java.io.InputStream
 
-class ThymeleafRenderHandler : Handler {
+class StaticFileHandler(private val enableBufferedStream: Boolean) : Handler {
 	
 	override fun handle(ctx: Context) {
 		
@@ -30,7 +31,10 @@ class ThymeleafRenderHandler : Handler {
 				val type = MimeTypes.getDefaultMimeByExtension(reqfile.path)
 				println("serve file -> ${reqfile.path} [$type]")
 				ctx.contentType(type) // ULTRA IMPORTANT, http header needs the serve mime type matching !!!!
-				ctx.result(BufferedInputStream(FileInputStream(reqfile)))
+				
+				var stream: InputStream = FileInputStream(reqfile)
+				if (enableBufferedStream) stream = BufferedInputStream(stream)
+				ctx.result(stream)
 			}
 			
 		} else {

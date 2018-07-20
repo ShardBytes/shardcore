@@ -25,7 +25,9 @@ data class CoreConfig(
 		val mongoUserName: String,
 		val mongoPassword: String,
 		// thyme
-		val cacheResetKey: String
+		val cacheActive: Boolean,
+		val cacheResetKey: String,
+		val enableBufferedStream: Boolean
 )
 
 class CoreServer(private val config: CoreConfig) {
@@ -36,7 +38,7 @@ class CoreServer(private val config: CoreConfig) {
 	
 	init {
 		
-		thymeleaf = ThymeleafFileTemplateEngine(false)
+		thymeleaf = ThymeleafFileTemplateEngine(config.cacheActive)
 		
 		// setup Javalin
 		app = Javalin.create().apply {
@@ -107,7 +109,7 @@ class CoreServer(private val config: CoreConfig) {
 			// custom static routing by Plasmoxy, NEEDS TO BE AFTER API ROUTING !
 			// TODO: fix this when @tipsy releases my patch PR
 			// and may actually not cus I like thymeleaf now
-			get("/*", ThymeleafRenderHandler())
+			get("/*", StaticFileHandler(config.enableBufferedStream))
 			
 		}
 		
