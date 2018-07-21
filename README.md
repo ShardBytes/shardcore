@@ -1,29 +1,27 @@
-# ShardCore is our main JVM server for our page
+## Welcome, my dude
+# ShardCore = our main JVM server for our page
 
-## -> [shardbytes.com](https://shardbytes.com)
+## pls visit -> [shardbytes.com](https://shardbytes.com) (if it's not down) ( it probably is )
 
-Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), Thymeleaf and similar stuff. Writen in Kotlin.
+Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), Thymeleaf, Angular and other weird things which apparently seem popular in web industry and I like them lmao. Writen with love, tears and Kotlin <3.
 
 ## **Notes**
 
 - **To run server one needs to specify configuration in config.json**
 	- ( or specify java argument with config file path in ./run )
 	- ( see configTemplate.json )
+    - run server by executing `run` command from anywhere
 
-**Create static and logs directories because the server serves them statically (or Javalin will rage)**
+**Create "static" and "logs" directories because the server serves them statically (or Javalin will rage)**
 
-### How to deploy ?
-- ./deploy -> it will git pull and build
+## deploy ?
+- use Jenkins faggt
 
-### Custom CI ->
-- start shardcore screen with ./corescreen in ShardCore directory ( stop all existing shardcore screens )
-- run ./integrate inside shardcore directory and it will 1. interrupt server 2. deploy 3. run server ( the shardcore screen needs to be running )
-- therefore you can have crontab like this :
-	```
-	0 * * * * cd <shardcore dir> && ./integrate >> logs/ci.txt 2>&1
-	```
-    and it will rebuild every hour and restart the server in screen container
-
+## Service
+- see `shardcore.service`, place in `/lib/systemd/system` and use ->
+    - start/restart/stop -> `sudo systemctl start/restart/stop shardcore`
+    - logs tail -> `sudo journalctl -f -u shardcore`
+    - last 100 lines of logs ? -> `sudo journalctl -n 100 --no-pager -u shardcore`
 ### RECONFIGURE FIREWALL PORTFORWARDING
 - https://linuxacademy.com/howtoguides/posts/show/topic/11630-internal-port-forwarding-on-linux-using-the-firewall
 - so we dont run java with sudo
