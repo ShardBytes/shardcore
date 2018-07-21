@@ -96,6 +96,10 @@ class CoreServer(private val config: CoreConfig) {
 				// core
 				get("/", IndexTemplate())
 				
+				get("/log") {
+					it.result(File("logs/teelog.txt").run { if (exists()) readText() else "No log file."})
+				}
+				
 				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
 				
 				get("random", RandomRest())
