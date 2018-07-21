@@ -1,3 +1,5 @@
+[![Build Status](https://shardbytes.com:10099/buildStatus/icon?job=shardcore)](https://shardbytes.com:10099/job/shardcore)
+
 ## Welcome, my dude
 # ShardCore = our main JVM server for our page
 
