@@ -1,4 +1,4 @@
-[![Build Status](https://shardbytes.com:10099/buildStatus/icon?job=shardcore)](https://shardbytes.com:10099/job/shardcore)
+[![Build Status](https://shardbytes.com:10099/buildStatus/icon?job=shardcore&.png)](https://shardbytes.com:10099/job/shardcore)
 
 ## Welcome, my dude
 # ShardCore = our main JVM server for our page
@@ -37,3 +37,8 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
     -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 10080
     COMMIT
     ```
+
+## enable build shields for readme in Jenkins ?
+- https://wiki.jenkins.io/display/JENKINS/Role+Strategy+Plugin
+- new role anonymous for job, add job name to pattern, set View-Status, assign to Anonymous user in Assign Roles
+- then install and use build status plugin https://plugins.jenkins.io/embeddable-build-status
