@@ -95,6 +95,7 @@ class CoreServer(private val config: CoreConfig) {
 				
 				// core
 				get("/", IndexTemplate())
+				
 				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
 				
 				get("random", RandomRest())

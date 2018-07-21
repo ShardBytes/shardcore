@@ -6,7 +6,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
 
-// browser doesnt cache or something, fucc thymeleaf, use STATTICCC
+// browser doesnt cache or something, fucc thymeleaf, use STATTICCC NORMALLL
 
 class StaticFileHandler(private val enableBufferedStream: Boolean) : Handler {
 	
