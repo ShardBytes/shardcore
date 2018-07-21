@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" ng-app>
 
 <head>
   <title>ShardBytes</title>
@@ -17,6 +17,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+  <!-- angularjs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
 
   <!-- core styles -->
   <link rel="stylesheet" href="/assets/css/core.css">
@@ -58,6 +61,9 @@
   <div id="bigimage" class="bg"></div>
 
   <div id="maincontent" class="container text-light">
+
+    Name : <input type="text" ng-model="name" placeholder="Enter your name">
+    <span>AngularJS: Hello, {{name}} !</span>
 
     <p> random number = <span th:text="${randomNumber}"/> <--- what is this @Plasmoxy? <--- its a template engine faggot @Plajdo </p>
     asd3
