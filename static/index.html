@@ -18,9 +18,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-  <!-- angularjs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
-
   <!-- core styles -->
   <link rel="stylesheet" href="/assets/css/core.css">
    
@@ -33,6 +30,9 @@
   <script src="/assets/lib/toast/android_toast.min.js"></script>
   <script src="/assets/lib/scrollTo/jquery.scrollTo.min.js"></script>
   <script src="/assets/lib/fancybox/jquery.fancybox.min.js"></script>
+
+  <!-- vuejs -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 </head>
 
@@ -62,10 +62,16 @@
 
   <div id="maincontent" class="container text-light">
 
-    Name : <input type="text" ng-model="name" placeholder="Enter your name">
-    <span>AngularJS: Hello, {{name}} !</span>
+    <div id="vueapp">
+      <p>Vue.js random : {{num}}</p>
+      <input type="text" v-model="msg" placeholder="Enter your name">
+      Your name is : {{msg}} ( Vue.js two-way)
+    </div>
 
-    <p> random number = <span th:text="${randomNumber}"/> <--- what is this @Plasmoxy? <--- its a template engine faggot @Plajdo </p>
+    
+    
+
+    <p> thymeleaf random number = <span th:text="${randomNumber}"/> <--- what is this @Plasmoxy? <--- its a template engine faggot @Plajdo </p>
     asd3
 
     <p class="text-light mallana bigger">
@@ -150,6 +156,7 @@
   </div>
 
   <script src="scroll.js"></script>
+  <script src="index.js"></script>
 
 </body>
 </html>
