@@ -4,12 +4,14 @@ import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import io.javalin.translator.template.JavalinThymeleafPlugin
+import logintest.UserCore
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
 import org.thymeleaf.TemplateEngine
 import rest.FruitRest
 import rest.RandomRest
+import logintest.UserRestGet
 import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
@@ -21,7 +23,7 @@ data class CoreConfig(
 		// keystore
 		val keystorePath: String,
 		val keystorePassword: String,
-		// mongo
+		// coreMongo
 		val mongoHost: String,
 		val mongoUserName: String,
 		val mongoPassword: String,
@@ -32,9 +34,11 @@ data class CoreConfig(
 
 class CoreServer(private val config: CoreConfig) {
 	
-	val mongo: Mongo
+	val coreMongo: CoreMongo
 	val app: Javalin
 	val thymeleaf: TemplateEngine
+	
+	val userCore: UserCore
 	
 	init {
 		
@@ -72,9 +76,11 @@ class CoreServer(private val config: CoreConfig) {
 			
 		}
 		
-		// setup mongo
-		mongo = Mongo(config.mongoHost, config.mongoUserName, config.mongoPassword)
+		// setup coreMongo
+		coreMongo = CoreMongo(config.mongoHost, config.mongoUserName, config.mongoPassword)
 		
+		// setup user core
+		userCore = UserCore(coreMongo)
 		
 		// setup routes
 		// last routed = first checked
@@ -103,7 +109,8 @@ class CoreServer(private val config: CoreConfig) {
 				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
 				
 				get("random", RandomRest())
-				get("fruit", FruitRest(mongo))
+				get("fruit", FruitRest(coreMongo))
+				get("/user/:name/:command", UserRestGet(userCore))
 				
 				get("/greet/:name/:age") {
 					it.html("Hello, my name is ${it.param("name")} and I got ${it.param("age")} yrs.")

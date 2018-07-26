@@ -39,7 +39,7 @@ static/data
 # CMake
 cmake-build-*/
 
-# Mongo Explorer plugin
+# CoreMongo Explorer plugin
 .idea/**/mongoSettings.xml
 
 # File-based project format
