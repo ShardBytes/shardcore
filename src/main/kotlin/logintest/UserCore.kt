@@ -1,5 +1,6 @@
 package logintest
 import CoreMongo
+import io.javalin.Context
 import org.litote.kmongo.getCollection
 
 class UserCore(val coreMongo: CoreMongo) {
@@ -21,6 +22,13 @@ class UserCore(val coreMongo: CoreMongo) {
 		return null
 	}
 	
+	fun processCommand(ctx: Context, user: User, command: String) = when (command) {
+		
+		"login" -> ctx.result("OK_LOGIN")
+		
+		else -> ctx.result("@ERROR:UNKNOWN_COMMAND")
+		
+	}
 	
 	
 }

@@ -11,7 +11,6 @@ import org.eclipse.jetty.util.ssl.SslContextFactory
 import org.thymeleaf.TemplateEngine
 import rest.FruitRest
 import rest.RandomRest
-import logintest.UserRestGet
 import logintest.UserRestPost
 import templates.IndexTemplate
 import websocket.RootEchoWS
@@ -111,8 +110,9 @@ class CoreServer(private val config: CoreConfig) {
 				
 				get("random", RandomRest())
 				get("fruit", FruitRest(coreMongo))
-				get("user/:name/:command", UserRestGet(userCore))
-				post("user/:name/:command", UserRestPost(userCore))
+				
+				// login test
+				post("logintest/:command", UserRestPost(userCore))
 				
 				get("/greet/:name/:age") {
 					it.html("Hello, my name is ${it.param("name")} and I got ${it.param("age")} yrs.")
