@@ -121,7 +121,7 @@ class CoreServer(private val config: CoreConfig,
 				
 				// messenger bot
 				get("shardbot/webhook") {
-					coreMessenger.verifyWebhook("subscribe", it.queryParam("hub.challenge")?:"")
+					coreMessenger.verifyWebhook("subscribe", it.queryParam("hub.verify_token")?:"")
 				}
 				post("shardbot/webhook", ShardBotHandler(coreMessenger))
 				
