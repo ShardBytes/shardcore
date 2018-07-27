@@ -1,17 +1,18 @@
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.github.messenger4j.Messenger
 import io.javalin.ApiBuilder.path
 import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
 import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
 import io.javalin.translator.template.JavalinThymeleafPlugin
 import logintest.UserCore
+import logintest.UserRestPost
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
 import org.thymeleaf.TemplateEngine
 import rest.FruitRest
 import rest.RandomRest
-import logintest.UserRestPost
 import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
@@ -32,9 +33,17 @@ data class CoreConfig(
 		val cacheResetKey: String
 )
 
-class CoreServer(private val config: CoreConfig) {
+data class MessengerConfig(
+		val PAGE_ACCESS_TOKEN: String,
+		val APP_SECRET: String,
+		val VERIFY_TOKEN: String
+)
+
+class CoreServer(private val config: CoreConfig,
+                 messengerConfig: MessengerConfig) {
 	
 	val coreMongo: CoreMongo
+	val coreMessenger: Messenger
 	val app: Javalin
 	val thymeleaf: TemplateEngine
 	
@@ -81,6 +90,9 @@ class CoreServer(private val config: CoreConfig) {
 		
 		// setup user core
 		userCore = UserCore(coreMongo)
+		
+		// setup messenger
+		coreMessenger = Messenger.create(messengerConfig.PAGE_ACCESS_TOKEN, messengerConfig.APP_SECRET, messengerConfig.VERIFY_TOKEN)
 		
 		// setup routes
 		// last routed = first checked
@@ -167,6 +179,15 @@ fun main(args: Array<String>) {
 		return
 	}
 	
-	CoreServer(config)
+	var messengerConfig: MessengerConfig
+	
+	try {
+		messengerConfig = jacksonObjectMapper().readValue(File("messenger.json"), MessengerConfig::class.java)
+	} catch (ex: Exception) {
+		println("FAILED TO LOAD MESSENGER CONFIG !")
+		messengerConfig = MessengerConfig("", "", "")
+	}
+	
+	CoreServer(config, messengerConfig)
 	
 }

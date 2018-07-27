@@ -1,6 +1,7 @@
 # --- self ----
 keystore.jks
 config.json
+messenger.json
 current.pid
 logs
 static/data
