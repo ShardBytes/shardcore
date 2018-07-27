@@ -13,6 +13,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory
 import org.thymeleaf.TemplateEngine
 import rest.FruitRest
 import rest.RandomRest
+import shardbot.ShardBotHandler
 import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
@@ -112,11 +113,17 @@ class CoreServer(private val config: CoreConfig,
 			path("/") {
 				
 				// core
-				get("/", IndexTemplate())
+				get("", IndexTemplate())
 				
-				get("/log") {
+				get("log") {
 					it.result(File("logs/teelog.txt").run { if (exists()) readText() else "No log file."})
 				}
+				
+				// messenger bot
+				get("shardbot/webhook") {
+					coreMessenger.verifyWebhook("subscribe", it.queryParam("hub.challenge")?:"")
+				}
+				post("shardbot/webhook", ShardBotHandler(coreMessenger))
 				
 				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
 				
@@ -126,7 +133,7 @@ class CoreServer(private val config: CoreConfig,
 				// login test
 				post("logintest/:command", UserRestPost(userCore))
 				
-				get("/greet/:name/:age") {
+				get("greet/:name/:age") {
 					it.html("Hello, my name is ${it.param("name")} and I got ${it.param("age")} yrs.")
 				}
 				
