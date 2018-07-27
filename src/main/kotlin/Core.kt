@@ -120,9 +120,13 @@ class CoreServer(private val config: CoreConfig,
 				}
 				
 				// messenger bot
+				// verify webhook
 				get("shardbot/webhook") {
-					coreMessenger.verifyWebhook("subscribe", it.queryParam("hub.verify_token")?:"")
+					if (it.queryParam("hub.verify_token") == messengerConfig.VERIFY_TOKEN) {
+						it.result(it.queryParam("hub.challenge")?:"")
+					}
 				}
+				// handle webhook
 				post("shardbot/webhook", ShardBotHandler(coreMessenger))
 				
 				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
