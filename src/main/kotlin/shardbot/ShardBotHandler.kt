@@ -23,7 +23,7 @@ class ShardBotHandler(private val messenger: Messenger) : Handler {
 		
 		"time", "Time", "Date", "date" -> SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(Date())
 		
-		"help, Help, info, Info, menu, Menu" -> "Here are the commands that I understand right now :\n" +
+		"help", "Help", "info", "Info", "menu", "Menu" -> "Here are the commands that I understand right now :\n" +
 				"hello/hi - says hello and introduces myself\n" +
 				"date - tells you the date (on the server)\n" +
 				"help/info/menu - displays this message\n" +
