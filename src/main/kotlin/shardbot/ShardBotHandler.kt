@@ -10,6 +10,8 @@ import com.github.messenger4j.webhook.Event
 import io.javalin.Context
 import io.javalin.Handler
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ShardBotHandler(private val messenger: Messenger) : Handler {
@@ -21,7 +23,7 @@ class ShardBotHandler(private val messenger: Messenger) : Handler {
 		"hi", "hello", "Hi", "Hello" -> "Hello ! This is a bot of a small group of students called ShardBytes. We like to use" +
 				"Java and Kotlin to create useful software (but sometimes games). You can visit us at https://shardbytes.com"
 		
-		"time", "Time", "Date", "date" -> SimpleDateFormat("yyyy-mm-dd hh:mm:ss").format(Date())
+		"time", "Time", "Date", "date" -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 		
 		"help", "Help", "info", "Info", "menu", "Menu" -> "Here are the commands that I understand right now :\n" +
 				"hello/hi - says hello and introduces myself\n" +
