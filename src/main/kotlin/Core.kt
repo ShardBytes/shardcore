@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.messenger4j.Messenger
+import cookietest.CookieTestHandler
 import io.javalin.ApiBuilder.path
 import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
@@ -137,6 +138,9 @@ class CoreServer(private val config: CoreConfig,
 				// login test
 				post("logintest/:command", UserRestPost(userCore))
 				
+				// cookie test
+				post("cookietest", CookieTestHandler(coreMongo.dbDemo))
+				
 				get("greet/:name/:age") {
 					it.html("Hello, my name is ${it.param("name")} and I got ${it.param("age")} yrs.")
 				}
@@ -157,11 +161,9 @@ class CoreServer(private val config: CoreConfig,
 		
 	}
 	
-	private fun getSslContextFactory(): SslContextFactory {
-		val sslContextFactory = SslContextFactory()
-		sslContextFactory.keyStorePath = config.keystorePath
-		sslContextFactory.setKeyStorePassword(config.keystorePassword)
-		return sslContextFactory
+	private fun getSslContextFactory() = SslContextFactory().apply {
+		keyStorePath = config.keystorePath
+		setKeyStorePassword(config.keystorePassword)
 	}
 	
 }
