@@ -10,7 +10,9 @@ setTimeout(function(){
   }
 }, 1000);
 
+// offset is because of fixedtop navbar !!
+
 $("#bigimage").click(function(){
   hasClicc = true;
-  $.scrollTo(document.getElementById("maincontent"), {duration: 1000});
+  $.scrollTo(document.getElementById("maincontent"), {duration: 1000, offset: -70});
 });

@@ -10,6 +10,10 @@ body, html{
   margin: 0;
 }
 
+body {
+  margin-top: 50px;
+}
+
 .bg{
   background-image: url("/assets/img/transplanetcut.png");
   height: 100%;
