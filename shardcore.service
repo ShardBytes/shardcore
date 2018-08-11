@@ -1,6 +1,6 @@
 [Unit]
 Description=ShardCore service
-After=netowkr.target mongod.service
+After=network.target mongod.service
 StartLimitIntervalSec=0
 
 [Service]
