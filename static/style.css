@@ -17,3 +17,14 @@ body, html{
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.nav.navbar-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .navbar-nav {
+      float: none;
+  }
+}
