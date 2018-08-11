@@ -3,7 +3,7 @@
 ## Welcome, my dude
 # ShardCore = our main JVM server for our page
 
-## pls visit -> [shardbytes.com](https://shardbytes.com) (if it's not down) ( it probably is )
+## pls visit -> [shardbytes.com](https://shardbytes.com) (if it's not down) ( it probably is lmao )
 
 Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), Thymeleaf, Angular and other weird things which apparently seem popular in web industry and I like them lmao. Writen with love, tears and Kotlin <3.
 
