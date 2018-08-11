@@ -5,4 +5,4 @@ echo -e "======= SHARDCORE RUN $(date) ======="
 cd $(dirname $0)
 
 # launch shardcore
-java -jar dist/shardcore-latest.jar |& tee logs/teelog.txt
+java -jar build/libs/shardcore-1.0.jar |& tee logs/teelog.txt
