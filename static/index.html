@@ -2,47 +2,46 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" ng-app>
 
 <head>
-  <title>ShardBytes</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShardBytes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- chrome color -->
+    <meta name="theme-color" content="#171718">
 
-  <!-- chrome color -->
-  <meta name="theme-color" content="#171718">
+    <!-- core FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Mallanna" rel="stylesheet">
 
-  <!-- core FONTS -->
-  <link href="https://fonts.googleapis.com/css?family=Mallanna" rel="stylesheet">
+    <!-- core BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
 
-  <!-- core BOOTSTRAP -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- core styles -->
+    <link rel="stylesheet" href="/assets/css/core.css">
 
-  <!-- fontawesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- STYLES -->
+    <link rel="stylesheet" type="text/css" href="/assets/lib/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/assets/lib/toast/android_toast.min.css" type="text/css">
+    <link rel="stylesheet" href="style.css">
 
-  <!-- core styles -->
-  <link rel="stylesheet" href="/assets/css/core.css">
-   
-  <!-- STYLES -->
-  <link rel="stylesheet" type="text/css" href="/assets/lib/fancybox/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/assets/lib/toast/android_toast.min.css" type="text/css">
-  <link rel="stylesheet" href="style.css">
+    <!-- SCRIPTS -->
+    <script src="/assets/lib/toast/android_toast.min.js"></script>
+    <script src="/assets/lib/scrollTo/jquery.scrollTo.min.js"></script>
+    <script src="/assets/lib/fancybox/jquery.fancybox.min.js"></script>
 
-  <!-- SCRIPTS -->
-  <script src="/assets/lib/toast/android_toast.min.js"></script>
-  <script src="/assets/lib/scrollTo/jquery.scrollTo.min.js"></script>
-  <script src="/assets/lib/fancybox/jquery.fancybox.min.js"></script>
-
-  <!-- angularjs -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
-
+    <!-- angularjs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
 </head>
 
 <body class="bg-darkblue">
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-darkerblue">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top
+            bg-darkerblue">
+        <div class="container justify-content-end"> <!-- j-c-e makes toggler go to right -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-div">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -55,7 +54,9 @@
                         <a class="nav-link" href="/learn/">learn</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/" class="navbar-brand">Shard<span class="text-aquamarine">Bytes</span></a>
+                        <a class="navbar-brand" href="/">
+                            Shard<span class="text-aquamarine">Bytes</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/ShardBytes">
@@ -65,38 +66,41 @@
                     <li class="nav-item">
                         <a class="btn btn-outline-aquamarine" href="https://shardbytes.com:10099">Jenkins</a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
     </nav>
 
-  <div id="bigimage" class="bg"></div>
+    <div id="bigimage" class="bg"></div>
 
-  <div id="maincontent" class="container text-light">
+    <div id="maincontent" class="container text-light">
 
-    <p class="text-light mallana bigger">
-      We are a group of programmers from Slovakia and we try our best to make
-      interesting applications, ranging from games to enterprise software.
-    </p>
+        <p class="text-light mallana bigger">
+            We are a group of programmers from Slovakia and we try our best to make interesting applications, ranging from games to enterprise
+            software.
+        </p>
 
-    <p class="text-light mallana">
-      This page is hosted on our VPS server on which we run all our apps. Take a look around ;)
-    </p>
+        <p class="text-light mallana">
+            This page is hosted on our VPS server on which we run all our apps. Take a look around ;)
+        </p>
 
-    <div class="text-center">
-        <p>meinkraft server = minecraft.shardbytes.com</p>
-        <p><img class="w-100" src="https://query.hicoria.com/query.php?user=mcx_192063" alt="server status"></p>
+        <div class="text-center">
+            <p>meinkraft server = minecraft.shardbytes.com</p>
+            <p>
+                <img class="w-100" src="https://query.hicoria.com/query.php?user=mcx_192063" alt="server status">
+            </p>
+        </div>
+
+        <div class="text-center">
+            <img class="w-100" src="/assets/img/boi.png">
+        </div>
+
     </div>
+    <!-- end maincontent -->
 
-    <div class="text-center">
-      <img class="w-100" src="/assets/img/boi.png">
-    </div>
-
-  </div> <!-- end maincontent -->
-
-  <script src="scroll.js"></script>
-  <script src="index.js"></script>
+    <script src="scroll.js"></script>
+    <script src="index.js"></script>
 
 </body>
+
 </html>
