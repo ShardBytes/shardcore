@@ -56,6 +56,6 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 - setup with 8080 (open port ufw)
 - get access to jenkins linuxaccount (maybe same password as setup ?)
 - setup SSL certificate (Java keystore .jks) -> edit `/etc/default/jenkins`   -> replace last line :
-    `JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=-1 --httpsPort=10099 --httpsKeyStore=/var/lib/jenkins/jenkins.jks --httpsKeyStorePassword=kysfaggot"`
-- ( add jenkins.jks ssl certificate to `/var/lib/jenkins` directory)
+    `JENKINS_ARGS="--webroot=/var/cache/$NAME/war --httpPort=-1 --httpsPort=10099 --httpsKeyStore=/var/lib/jenkins/jenkins.jks --httpsKeyStorePassword=<password>"`
+- ( add jenkins.jks ssl certificate to `/var/lib/jenkins` directory and change password here)
 - reboot or something, jenkins should be running with SSL on port 10099
