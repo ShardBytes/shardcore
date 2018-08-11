@@ -1,5 +1,7 @@
 [![Build Status](https://shardbytes.com:10099/buildStatus/icon?job=shardcore&.png)](https://shardbytes.com:10099/job/shardcore) [![](https://img.shields.io/badge/framework-Javalin-blue.svg)](https://javalin.io/) [![](https://img.shields.io/badge/language-Kotlin-orange.svg)](https://kotlinlang.org/)
 
+[![](https://shardbytes.com/assets/img/transplanetcut.png)](https://shardbytes.com)
+
 ## Welcome, my dude
 # ShardCore = our main JVM server for our page
 
