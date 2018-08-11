@@ -1,3 +1,9 @@
+/** ShardCore Core class for ShardCore server by ShardBytes
+ *
+ *  (c) ShardBytes
+ *
+ */
+
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.messenger4j.Messenger
 import io.javalin.ApiBuilder.path
@@ -46,6 +52,7 @@ class CoreServer(private val config: CoreConfig,
 	val coreMongo: CoreMongo
 	val coreMessenger: Messenger
 	val app: Javalin
+	val redirectServer: Javalin
 	val thymeleaf: TemplateEngine
 	
 	val userCore: UserCore
@@ -57,7 +64,7 @@ class CoreServer(private val config: CoreConfig,
 		// setup Javalin
 		app = Javalin.create().apply {
 			
-			// setup jetty
+			// setup jetty with SSL
 			embeddedServer(EmbeddedJettyFactory {
 				Server().apply {
 					
@@ -66,12 +73,7 @@ class CoreServer(private val config: CoreConfig,
 						port = config.sslPort
 					}
 					
-					// http connector
-					val httpConnector = ServerConnector(this).apply {
-						port = config.port
-					}
-					
-					connectors = arrayOf(sslConnector, httpConnector)
+					connectors = arrayOf(sslConnector)
 					
 				}
 			})
@@ -82,8 +84,22 @@ class CoreServer(private val config: CoreConfig,
 			enableStaticFiles("static", Location.EXTERNAL)
 			
 			start()
-			println("==== JAVALIN STARTED ====")
+			println("==== Core app started ! ====")
 			
+		}
+		
+		// setup separate redirect server
+		redirectServer = Javalin.create().disableStartupBanner().port(config.port).apply {
+			// redirect to https
+			before {
+				if (it.port() == 80 || it.port() == config.port) { // disallow port non ssl port requests
+					println("<REDIRECT> Redirecting ${it.request().remoteAddr} to https ...")
+					it.redirect(it.url().replace("http://", "https://"), 301) // 301 status->moved permanently
+				}
+			}
+			
+			start()
+			println("<REDIRECT> === Redirect server started. ===")
 		}
 		
 		// setup coreMongo
@@ -99,16 +115,10 @@ class CoreServer(private val config: CoreConfig,
 		// last routed = first checked
 		app.apply {
 			
-			// redirect to https
+			// watch requests
 			before {
 				println("@[${it.request().method}] <${it.request().remoteAddr}> <${it.port()}> ${it.url()}")
-				
-				if (it.port() == 80 || it.port() == config.port) { // disallow port non ssl port requests
-					println("[REDIRECT] Redirecting ${it.request().remoteAddr} to https ...")
-					it.redirect(it.url().replace("http://", "https://"), 301) // 301 status->moved permanently
-				}
 			}
-			
 			
 			path("/") {
 				
@@ -153,7 +163,7 @@ class CoreServer(private val config: CoreConfig,
 			println("@[ERROR] [${it.status()}] ${it.path()}")
 		}
 		
-		println("===== ROUTING DONE =====")
+		println("===== CORE ROUTING COMPLETE, LET THE ACTION BEGIN ! xD =====")
 		
 	}
 	
