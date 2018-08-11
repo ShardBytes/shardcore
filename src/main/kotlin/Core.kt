@@ -185,6 +185,7 @@ fun main(args: Array<String>) {
 		ex.printStackTrace()
 		println("=======================================")
 		println("exiting ...")
+		System.exit(-1)
 		return
 	}
 	
