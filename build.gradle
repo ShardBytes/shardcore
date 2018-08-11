@@ -56,12 +56,17 @@ jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
+// nope fuck that we got a CI now
+/*
 task distribute(dependsOn: build, type: Copy) {
     from "build/libs/"
     into "dist/"
     include "shardcore-${version}.jar"
     rename("shardcore-${version}.jar", "shardcore-latest.jar")
 }
+
 configure(distribute) {
     group = "application"
 }
+
+*/
