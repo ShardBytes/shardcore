@@ -157,11 +157,9 @@ class CoreServer(private val config: CoreConfig,
 		
 	}
 	
-	private fun getSslContextFactory(): SslContextFactory {
-		val sslContextFactory = SslContextFactory()
-		sslContextFactory.keyStorePath = config.keystorePath
-		sslContextFactory.setKeyStorePassword(config.keystorePassword)
-		return sslContextFactory
+	private fun getSslContextFactory(): SslContextFactory = SslContextFactory().apply {
+		keyStorePath = config.keystorePath
+		setKeyStorePassword(config.keystorePassword)
 	}
 	
 }
