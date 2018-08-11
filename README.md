@@ -44,6 +44,11 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 - then install and use build status plugin https://plugins.jenkins.io/embeddable-build-status
 
 
+## Setup gradle
+- get gradle bin
+- extract in `/opt/gradle` or something so bin is in there
+- ln-s that faggt to `/usr/local/bin`
+
 ## Jenkins setup and stuff
 - install https://wiki.jenkins.io/display/JENKINS/Installing+Jenkins+on+Ubuntu
 - setup with 8080 (open port ufw)
