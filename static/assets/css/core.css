@@ -1,3 +1,7 @@
+/* Core style for ShardBytes */
+
+/* backgrounds */
+
 .bg-darkblue{
   background-color: #1d1d1f;
 }
@@ -6,9 +10,7 @@
   background-color: #171718;
 }
 
-.text-aquamarine {
-  color: #2cffdf;
-}
+/* text */
 
 .big{
   font-size: 110%;
@@ -20,4 +22,20 @@
 
 .mallana{
   font-family: 'Mallanna', sans-serif;
+}
+
+.text-aquamarine {
+  color: #2cffdf;
+}
+
+/* CUSTOM BUTTONS */
+
+.btn-outline-aquamarine {
+  color: #2cffdf;
+  border-color: #2cffdf;
+}
+
+.btn-outline-aquamarine:hover {
+  color: #171718;
+  background-color: #2cffdf;
 }
