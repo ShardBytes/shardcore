@@ -2,40 +2,66 @@
 
 /* backgrounds */
 
-.bg-darkblue{
-  background-color: #1d1d1f;
-}
+  .bg-darkblue{
+    background-color: #1d1d1f;
+  }
 
-.bg-darkerblue{
-  background-color: #171718;
-}
+  .bg-darkerblue{
+    background-color: #171718;
+  }
 
-/* text */
+  /* text */
 
-.big{
-  font-size: 110%;
-}
+  .big{
+    font-size: 110%;
+  }
 
-.bigger{
-  font-size: 120%;
-}
+  .bigger{
+    font-size: 120%;
+  }
 
-.mallana{
-  font-family: 'Mallanna', sans-serif;
-}
+  .mallana{
+    font-family: 'Mallanna', sans-serif;
+  }
 
-.text-aquamarine {
-  color: #2cffdf;
-}
+  .text-aquamarine {
+    color: #2cffdf;
+  }
 
 /* CUSTOM BUTTONS */
 
-.btn-outline-aquamarine {
-  color: #2cffdf;
-  border-color: #2cffdf;
+/* disable outline glow */
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.btn-outline-aquamarine:hover {
-  color: #171718;
-  background-color: #2cffdf;
-}
+  /* aquamarine outline */
+    .btn-outline-aquamarine {
+      color: #2cffdf;
+      border-color: #2cffdf;
+    }
+
+    .btn-outline-aquamarine:hover {
+      color: #171718;
+      background-color: #2cffdf;
+    }
+
+    .btn-aquamarine:active, .btn-aquamarine.active {
+      background: #27ddc2;
+    }
+
+  /* aquamarine */
+
+    .btn-aquamarine {
+      color: #171718;
+      background-color: #2cffdf;
+    }
+
+    .btn-aquamarine:hover, .btn-aquamarine:focus, .btn-aquamarine:active, .btn-aquamarine.active, .open > .dropdown-toggle.btn-aquamarine {
+      background: #2ae6c9;
+    }
+
+    .btn-aquamarine:active, .btn-aquamarine.active {
+      background: #2ae6c9;
+    }
