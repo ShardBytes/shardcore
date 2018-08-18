@@ -7,6 +7,7 @@
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.messenger4j.Messenger
+import discord.Shardy
 import io.javalin.ApiBuilder.path
 import io.javalin.Javalin
 import io.javalin.embeddedserver.Location
@@ -24,6 +25,8 @@ import shardbot.ShardBotHandler
 import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
+import net.dv8tion.jda.core.AccountType
+import net.dv8tion.jda.core.JDABuilder
 
 class CoreServer(private val config: CoreConfig,
                  messengerConfig: MessengerConfig,
@@ -31,6 +34,8 @@ class CoreServer(private val config: CoreConfig,
 	
 	val coreMongo: CoreMongo
 	val coreMessenger: Messenger
+	var shardy: Shardy? = null
+	
 	val app: Javalin
 	val redirectServer: Javalin
 	val thymeleaf: TemplateEngine
@@ -89,10 +94,12 @@ class CoreServer(private val config: CoreConfig,
 		userCore = UserCore(coreMongo)
 		
 		// setup messenger
+		println("[MESSENGER] Setting up messenger")
 		coreMessenger = Messenger.create(messengerConfig.PAGE_ACCESS_TOKEN, messengerConfig.APP_SECRET, messengerConfig.VERIFY_TOKEN)
+		println("[MESSENGER] DONE")
 		
-		// setup discord
-		
+		// discord
+		startShardy(discordConfig)
 		
 		// setup routes
 		// last routed = first checked
@@ -122,17 +129,24 @@ class CoreServer(private val config: CoreConfig,
 				// handle webhook
 				post("shardbot/webhook", ShardBotHandler(coreMessenger))
 				
-				//get("resetCache/:key", CacheResetREST(thymeleaf, config.cacheResetKey))
+				// discord
+				get("shardy/:cmd") { when(it.param("cmd")) {
+					"start" -> {
+						startShardy(discordConfig)
+						it.result("started Shardy")
+					}
+					"stop" -> {
+						stopShardy()
+						it.result("stopped Shardy")
+					}
+				}}
 				
+				// normal debug
 				get("random", RandomRest())
 				get("fruit", FruitRest(coreMongo))
 				
 				// login test
 				post("logintest/:command", UserRestPost(userCore))
-				
-				get("greet/:name/:age") {
-					it.html("Hello, my name is ${it.param("name")} and I got ${it.param("age")} yrs.")
-				}
 				
 				ws("", RootEchoWS())
 				
@@ -153,6 +167,30 @@ class CoreServer(private val config: CoreConfig,
 	private fun getSslContextFactory(): SslContextFactory = SslContextFactory().apply {
 		keyStorePath = config.keystorePath
 		setKeyStorePassword(config.keystorePassword)
+	}
+	
+	
+	private fun startShardy(config: DiscordConfig) {
+		// setup discord
+		println("[DISCORD] Starting bot Shardy")
+		
+		if (shardy == null) {
+			try {
+				shardy = Shardy(JDABuilder(AccountType.BOT).setToken(config.token).build().awaitReady())
+				println("[DISCORD] Started !")
+			} catch (ex: Exception) {
+				println("[DISCORD] ERROR -> problems starting shardy ! -> ${ex.message}")
+			}
+		} else {
+			println("[DISCORD] Error starting shardy, already running")
+		}
+		
+	}
+	
+	private fun stopShardy() {
+		println("[DISCORD] Stopping Shardy")
+		shardy?.shutdown()
+		shardy = null
 	}
 	
 }
