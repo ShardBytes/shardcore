@@ -5,6 +5,7 @@
  */
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.messenger4j.Messenger
 import io.javalin.ApiBuilder.path
 import io.javalin.Javalin
@@ -24,30 +25,9 @@ import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
 
-data class CoreConfig(
-		// ports
-		val port: Int,
-		val sslPort: Int,
-		// keystore
-		val keystorePath: String,
-		val keystorePassword: String,
-		// coreMongo
-		val mongoHost: String,
-		val mongoUserName: String,
-		val mongoPassword: String,
-		// thyme
-		val cacheActive: Boolean,
-		val cacheResetKey: String
-)
-
-data class MessengerConfig(
-		val PAGE_ACCESS_TOKEN: String,
-		val APP_SECRET: String,
-		val VERIFY_TOKEN: String
-)
-
 class CoreServer(private val config: CoreConfig,
-                 messengerConfig: MessengerConfig) {
+                 messengerConfig: MessengerConfig,
+                 discordConfig: DiscordConfig) {
 	
 	val coreMongo: CoreMongo
 	val coreMessenger: Messenger
@@ -110,6 +90,9 @@ class CoreServer(private val config: CoreConfig,
 		
 		// setup messenger
 		coreMessenger = Messenger.create(messengerConfig.PAGE_ACCESS_TOKEN, messengerConfig.APP_SECRET, messengerConfig.VERIFY_TOKEN)
+		
+		// setup discord
+		
 		
 		// setup routes
 		// last routed = first checked
@@ -202,12 +185,21 @@ fun main(args: Array<String>) {
 	var messengerConfig: MessengerConfig
 	
 	try {
-		messengerConfig = jacksonObjectMapper().readValue(File("messenger.json"), MessengerConfig::class.java)
+		messengerConfig = jacksonObjectMapper().readValue(File("messenger.json"))
 	} catch (ex: Exception) {
-		println("FAILED TO LOAD MESSENGER CONFIG !")
+		println("[ ERROR ] -> FAILED TO LOAD MESSENGER CONFIG !")
 		messengerConfig = MessengerConfig("", "", "")
 	}
 	
-	CoreServer(config, messengerConfig)
+	var discordConfig: DiscordConfig
+	try {
+		discordConfig = jacksonObjectMapper().readValue(File("discord.json"))
+	} catch (ex: Exception) {
+		println("[ ERROR ] -> FAILED TO LOAD DISCORD CONFIG !")
+		discordConfig = DiscordConfig("")
+	}
+	
+	println("<----- STARTING CORE ----->")
+	CoreServer(config, messengerConfig, discordConfig)
 	
 }

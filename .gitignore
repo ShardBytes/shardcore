@@ -2,6 +2,7 @@
 keystore.jks
 config.json
 messenger.json
+discord.json
 current.pid
 logs
 static/data

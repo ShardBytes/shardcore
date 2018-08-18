@@ -14,6 +14,7 @@ mainClassName="CoreKt"
 
 repositories {
     mavenCentral()
+	jcenter()
 }
 
 dependencies {
@@ -32,6 +33,9 @@ dependencies {
     
     // messenger4j
     compile 'com.github.messenger4j:messenger4j:1.0.0'
+    
+    // jda
+    compile 'net.dv8tion:JDA:3.7.1_395'
     
     // jtwig
     // compile "org.jtwig:jtwig-core:5.87.0.RELEASE"
