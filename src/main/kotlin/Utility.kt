@@ -11,7 +11,7 @@ fun noWhiteSpace(text: String)
 fun Context.routeStaticThymeleaf(model: Map<String, Any?>) {
 	val file = File("static/${path()}")
 	if (file.exists()) {
-		renderThymeleaf(file.readText(), model)
+		render(file.readText(), model)
 	} else {
 		status(404)
 	}

@@ -1,11 +1,12 @@
 package websocket
 
-import io.javalin.embeddedserver.jetty.websocket.WebSocketConfig
-import io.javalin.embeddedserver.jetty.websocket.WebSocketHandler
 
-class RootEchoWS : WebSocketConfig {
+import io.javalin.websocket.WsHandler
+import java.util.function.Consumer
+
+class RootEchoWS : Consumer<WsHandler> {
 	
-	override fun configure(ws: WebSocketHandler) {
+	override fun accept(ws: WsHandler) {
 		
 		ws.onConnect {
 			println("${it.remoteAddress} connected")

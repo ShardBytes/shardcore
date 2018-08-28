@@ -6,6 +6,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
 
+// !! UNUSED
 // browser doesnt cache or something, fucc thymeleaf, use STATTICCC NORMALLL
 
 class StaticFileHandler(private val enableBufferedStream: Boolean) : Handler {
@@ -23,7 +24,7 @@ class StaticFileHandler(private val enableBufferedStream: Boolean) : Handler {
 				val index = File("static/$splat/index.html")
 				if (index.exists()) {
 					println("-> serving thymeleaf index.html of /$splat")
-					ctx.renderThymeleaf(index.path, mapOf()) // render empty thymeleaf
+					ctx.render(index.path, mapOf()) // render empty thymeleaf
 					// ( this wont be executed if something else was routed here before ofc )
 				} else {
 					ctx.status(404)

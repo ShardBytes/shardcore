@@ -8,7 +8,7 @@ class IndexTemplate : Handler {
 	override fun handle(ctx: Context) {
 		
 		// uses file template engine
-		ctx.renderThymeleaf("static/index", mapOf(
+		ctx.render("static/index.html", mapOf(
 				"randomNumber" to Math.random()
 		))
 		

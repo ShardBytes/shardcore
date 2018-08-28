@@ -8,13 +8,15 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.github.messenger4j.Messenger
 import discord.Shardy
-import io.javalin.ApiBuilder.path
 import io.javalin.Javalin
-import io.javalin.embeddedserver.Location
-import io.javalin.embeddedserver.jetty.EmbeddedJettyFactory
-import io.javalin.translator.template.JavalinThymeleafPlugin
+import io.javalin.apibuilder.ApiBuilder.path
+import io.javalin.rendering.JavalinRenderer
+import io.javalin.rendering.template.JavalinThymeleaf
+import io.javalin.staticfiles.Location
 import logintest.UserCore
 import logintest.UserRestPost
+import net.dv8tion.jda.core.AccountType
+import net.dv8tion.jda.core.JDABuilder
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
@@ -25,8 +27,6 @@ import shardbot.ShardBotHandler
 import templates.IndexTemplate
 import websocket.RootEchoWS
 import java.io.File
-import net.dv8tion.jda.core.AccountType
-import net.dv8tion.jda.core.JDABuilder
 
 class CoreServer(private val config: CoreConfig,
                  messengerConfig: MessengerConfig,
@@ -38,19 +38,16 @@ class CoreServer(private val config: CoreConfig,
 	
 	val app: Javalin
 	val redirectServer: Javalin
-	val thymeleaf: TemplateEngine
 	
 	val userCore: UserCore
 	
 	init {
 		
-		thymeleaf = ThymeleafFileTemplateEngine(config.cacheActive)
-		
 		// setup Javalin
 		app = Javalin.create().apply {
 			
 			// setup jetty with SSL
-			embeddedServer(EmbeddedJettyFactory {
+			server {
 				Server().apply {
 					
 					// https connector
@@ -61,10 +58,11 @@ class CoreServer(private val config: CoreConfig,
 					connectors = arrayOf(sslConnector)
 					
 				}
-			})
+			}
 			
 			// setup thymeleaf plugin
-			JavalinThymeleafPlugin.configure(thymeleaf)
+			JavalinThymeleaf.configure(ThymeleafFileTemplateEngine(config.cacheActive))
+			JavalinRenderer.register(JavalinThymeleaf)
 			
 			enableStaticFiles("static", Location.EXTERNAL)
 			
@@ -78,7 +76,7 @@ class CoreServer(private val config: CoreConfig,
 			// redirect to https
 			before {
 				if (it.port() == 80 || it.port() == config.port) { // disallow port non ssl port requests
-					println("<REDIRECT> Redirecting ${it.request().remoteAddr} to https ...")
+					println("<REDIRECT> Redirecting ${it.req.remoteAddr} to https ...")
 					it.redirect(it.url().replace("http://", "https://"), 301) // 301 status->moved permanently
 				}
 			}
@@ -107,13 +105,13 @@ class CoreServer(private val config: CoreConfig,
 			
 			// watch requests
 			before {
-				println("@[${it.request().method}] <${it.request().remoteAddr}> <${it.port()}> ${it.url()}")
+				println("@[${it.req.method}] <${it.req.remoteAddr}> <${it.port()}> ${it.url()}")
 			}
 			
 			path("/") {
 				
-				// core
-				get("", IndexTemplate())
+				// only when using thymeleaf, otherwise leave to static
+				// get("", IndexTemplate())
 				
 				get("log") {
 					it.result(File("logs/teelog.txt").run { if (exists()) readText() else "No log file."})
@@ -130,7 +128,7 @@ class CoreServer(private val config: CoreConfig,
 				post("shardbot/webhook", ShardBotHandler(coreMessenger))
 				
 				// discord
-				get("shardy/:cmd") { when(it.param("cmd")) {
+				get("shardy/:cmd") { when(it.pathParam("cmd")) {
 					"start" -> {
 						startShardy(discordConfig)
 						it.result("started Shardy")
@@ -151,6 +149,7 @@ class CoreServer(private val config: CoreConfig,
 				ws("", RootEchoWS())
 				
 			}
+			
 			
 		}
 		

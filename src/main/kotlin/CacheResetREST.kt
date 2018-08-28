@@ -8,7 +8,7 @@ class CacheResetREST(private val engine: TemplateEngine,
 	
 	override fun handle(ctx: Context) {
 		
-		if (cacheResetKey == ctx.param("key")) {
+		if (cacheResetKey == ctx.pathParam("key")) {
 			engine.clearTemplateCache()
 			ctx.result("ok cache cleared")
 		} else {

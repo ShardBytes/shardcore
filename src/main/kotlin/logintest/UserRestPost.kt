@@ -7,7 +7,7 @@ class UserRestPost(val userCore: UserCore) : Handler {
 	override fun handle(ctx: Context) {
 	
 		val auth = ctx.basicAuthCredentials()
-		val command = ctx.param("command") ?: ""
+		val command = ctx.pathParam("command")
 		
 		if (auth == null) { // if no auth -> no username
 			ctx.result("@ERROR:NO_AUTH")
