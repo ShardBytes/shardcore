@@ -16,8 +16,6 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 	- ( or specify java argument with config file path in ./run )
 	- ( see configTemplate.json )
     - run server by executing `run` command from anywhere
-    
-- **USE GRADLE WRAPPER NOT DAEMON FAGGOT, Jenkins really doesn't like daemons now and will restart it every time if it wasn't started by jenkins user itself before manually, but wrapper seems to be quite fast too, ADAPT !**
 
 **Create "static" and "logs" directories because the server serves them statically (or Javalin will rage)**
 
