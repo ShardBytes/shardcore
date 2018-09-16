@@ -43,7 +43,7 @@ class CoreServer(private val config: CoreConfig,
 	
 	init {
 		
-		// setup Javalin app
+		// setup Javalin
 		app = Javalin.create().apply {
 			
 			// setup jetty with SSL
