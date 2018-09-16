@@ -3,7 +3,8 @@
 [![](https://shardbytes.com/assets/img/transplanetcut.png)](https://shardbytes.com)
 
 ## Welcome, my dude
-# ShardCore = our main JVM server for our page
+# ShardCore = our main JVM server for our page, also basically our VPS idk
+# this also includes notes for setting up the whole vps
 
 ## pls visit -> [shardbytes.com](https://shardbytes.com) (if it's not down) ( it probably is lmao )
 
