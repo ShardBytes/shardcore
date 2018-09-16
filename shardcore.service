@@ -8,7 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=jenkins
-ExecStart=/var/lib/jenkins/workspace/shardcore/run
+ExecStart=/var/lib/jenkins/jobs/shardcore/workspace/run
 
 [Install]
 WantedBy=multi-user.target
