@@ -23,6 +23,9 @@
               <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-compiler-embeddable/1.2.70/d3d4eff2bb498aa7ec30d9e267bb9781aedbc441/kotlin-scripting-compiler-embeddable-1.2.70.jar" />
             </array>
           </option>
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
         </compilerArguments>
       </configuration>
     </facet>
