@@ -61,10 +61,11 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 - ( add jenkins.jks ssl certificate to `/var/lib/jenkins` directory and change password here)
 - reboot or something, jenkins should be running with SSL on port 10099
 
-## Setup gradle daemon autostart for jenkins
-- for some weird reason Jenkins now kills gradle daemon after job is complete so we launch a single gradle daemon for Jenknis on startup
-- add to /etc/rc.local :
- ```
- su jenkins -c "cd /var/lib/jenkins && gradle"
- ```
-- this will start gradle daemon on boot and Jenkins will use it
+## Make Jenkins keep Gradle daemon
+- for some weird reason Jenkins now kills gradle daemon after job is complete
+- to keep the Gradle daemon, we need to tel Jenkins to not kill processes
+- instead of Gradle plugin, use execute shell script:
+  ```
+  BUILD_ID=dontKillMe
+  gradle build
+  ```
