@@ -1,8 +1,8 @@
 #!/bin/bash
 echo -e "======= SHARDCORE RUN $(date) ======="
 
-# cd into this script location (should be shardcore dir)
-cd $(dirname $0)
+# only if you don't setup WorkingDirectory in systemd service
+# cd $(dirname $0)
 
 # launch shardcore
 java -jar build/libs/shardcore-1.0.jar |& tee logs/teelog.txt

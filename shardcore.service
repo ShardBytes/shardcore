@@ -8,6 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=jenkins
+WorkingDirectory=/var/lib/jenkins/jobs/shardcore/workspace
 ExecStart=/var/lib/jenkins/jobs/shardcore/workspace/run
 
 [Install]
