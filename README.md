@@ -23,7 +23,7 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 - use Jenkins faggt
 
 ## Service
-- see `shardcore.service`, place in `/lib/systemd/system` and use ->
+- see `shardcore.service`, place in `/etc/systemd/system` and use ->
     - start/restart/stop -> `sudo systemctl start/restart/stop shardcore`
     - logs tail -> `sudo journalctl -f -u shardcore`
     - last 100 lines of logs ? -> `sudo journalctl -n 100 --no-pager -u shardcore`
