@@ -61,7 +61,8 @@ Based on [Javalin](https://javalin.io/), [KMongo](https://litote.org/kmongo/), T
 - ( add jenkins.jks ssl certificate to `/var/lib/jenkins` directory and change password here)
 - reboot or something, jenkins should be running with SSL on port 10099
 
-## Make Jenkins keep Gradle daemon
+## Make Jenkins keep Gradle daemon -> but you will do fine by disabling it
+- without daemon it takes only like 30s for one build so better disable it so it doesnt eat all the ram, (https://marschall.github.io/2016/08/06/disabling-gradle-daemon.html)
 - for some weird reason Jenkins now kills gradle daemon after job is complete
 - to keep the Gradle daemon, we need to tel Jenkins to not kill processes
 - instead of Gradle plugin, use execute shell script:
