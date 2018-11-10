@@ -14,5 +14,5 @@ setTimeout(function(){
 
 $("#bigimage").click(function(){
   hasClicc = true;
-  $.scrollTo(document.getElementById("maincontent"), {duration: 1000, offset: 0});
+  $.scrollTo(document.getElementById("maincontent"), {duration: 1000, offset: -70});
 });
