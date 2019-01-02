@@ -1,0 +1,143 @@
+<html>
+
+<head>
+    <title>API 1.3.1</title>
+</head>
+
+<body>
+<pre>
+// API Routing (this links different API objects to Javalin) - also it is a simple API documentation (comments)
+app.routes {
+    
+    // index
+    get("") {
+        it.html("")
+    }
+    
+    // Simple testing API that server works
+    get("ping") {
+        it.result("pong")
+    }
+    
+    // APIs:
+    
+    path("api") {
+        
+        // version API -> returns current server API version string, check this in clients so they match !!!
+        get("version") {
+            it.result(API_VERSION)
+        }
+        
+        // User API
+        path("user") {
+            
+            // Check session token authentication
+            post("auth", UserApiAuth(db, mgr)) // BasicAuth(username, session_token) -> status 200-OK or 401-Unauthorized
+            
+            // Login with username and password, returns session token for authentication
+            post("login", UserApiLogin(db, mgr)) // BasicAuth(username, password) -> 200-OK (body String) or 401 Unauthorized
+            
+            // Get user info
+            get("info", UserApiInfo(db, mgr)) // auth user -> UserInfo
+            
+            // Charge user credit
+            post("charge", UserApiCharge(db, mgr)) // auth operator, body ChargeRequest -> 200-OK or 400-BadRequest (user not found)
+            
+            // Register a new user, user can register only users with lower permissions (role) !
+            post(UserApiRegister(db, mgr, INSECURE)) // auth operator, body RegisterRequest -> 200-OK or 401-Unauthorized or unauthorized to register such role
+            
+            // Delete user
+            delete(":name", UserApiDelete(db, mgr)) // auth admin, :name username -> 200-OK, 404 user not found
+        }
+        
+        // Item API
+        path("item") {
+            // Get a list of all items in database
+            get("all", ApiItemListAll(db)) // -> list<ShopItem>
+            
+            // Get a list of only specific items determined by a list of their names
+            post("list", ApiItemList(db)) // body (list<String> of item names) -> list<ShopItem>
+            
+            // Get item by name
+            get(":name", ApiItemGet(db)) // :name (item name) -> ShopItem
+            
+            // Upsert - update item, if it doesn't exist -> create it
+            post(ApiItemUpsert(db, mgr)) // auth operator, body ShopItem -> UpsertResponse
+            
+            // Delete item
+            delete(":name", ApiItemDelete(db, mgr)) // auth operator, :name (item name) -> DeleteResponse
+        }
+        
+        // Record API, main (root) record is called "root" !
+        path("record") {
+            // List record content by name, returns list of either ShopItem or ShopRecord
+            get("list/:name", ApiRecordList(db)) // :name (record name) -> list<if (contentType==item) ShopItem else ShopRecord>
+            
+            // Get a list of all records
+            get("all", ApiRecordListAll(db)) // -> list<ShopRecord>
+            
+            // Get a record by name
+            get(":name", ApiRecordGet(db)) // :name (record name) -> ShopRecord
+            
+            // Upsert a record
+            post(ApiRecordUpsert(db, mgr)) // auth operator, body ShopRecord -> UpsertResponse
+            
+            // Delete a record
+            delete(":name", ApiRecordDelete(db, mgr)) // auth operator, 200-OK
+        }
+        
+        // Order API
+        path("order") {
+            
+            path("active") {
+                
+                // Determine whether ordering is active
+                get {// -> true or false
+                    it.result(ServerState.data.ordersActive.toString())
+                }
+                
+                // Activate/deactivate ordering.
+                post(":value", ApiOrderSetActive(db, mgr)) // :value (-> true or false) -> OK
+            }
+            
+            // Get a list of all orders
+            get("all", ApiOrderListAll(db, mgr)) // auth operator -> list<ShopOrder> (all orders)
+            
+            // Get a list of all orders of a single user
+            get(ApiOrderListUser(db, mgr)) // auth normal -> list<ShopOrder>
+            
+            // Create an order as user
+            post(ApiOrderCreate(db, mgr)) // auth normal, body OrderRequest -> 200-OK, 400 bad request (body OrderCreateErrorReponse)
+            
+            // Cancel an order as user
+            post("cancel/:number", ApiOrderCancel(db, mgr)) // auth normal, :number (order number) -> 200-OK, 404-order not found, 400-bad request order doesn't belong to user
+            
+            // Complete an order as delivery and higher
+            post("complete", ApiOrderComplete(db, mgr)) // auth delivery, body CompleteOrderRequest -> 200-OK, 404-order not found, 400-bad request wrong order password
+
+            // Delete an order
+            delete(":number", ApiOrderDelete(db, mgr)) // auth operator, :number (order number) -> 200-OK, 404-order not found
+        }
+        
+        
+        // Backup API
+        path("backup") {
+            // Backup orders into backup folder of server
+            post("orders", ApiOrderBackup(db, mgr)) // auth operator -> 200-OK
+        }
+        
+    }
+    
+}
+</pre>
+</body>
+
+<style>
+    body {
+        background: #11111f;
+        color: #EEE;
+    }
+</style>
+
+
+</html>
