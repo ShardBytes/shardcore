@@ -1,10 +1,12 @@
 [
 	{
 		"title": "GyMind server",
-		"address": "https://shardbytes.com:10101"
+		"address": "https://shardbytes.com:10101",
+		"imageId": "gymind.png"
 	},
 	{
 		"title": "Development server",
-		"address": "none yet"
+		"address": "none yet",
+		"imageId": "devserver.png"
 	}
 ]
