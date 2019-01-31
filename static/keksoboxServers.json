@@ -1,0 +1,10 @@
+[
+	{
+		"title": "GyMind server",
+		"address": "https://shardbytes.com:10101"
+	},
+	{
+		"title": "Development server",
+		"address": "none yet"
+	}
+]
