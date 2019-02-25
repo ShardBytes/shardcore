@@ -24,14 +24,16 @@
     <link rel="stylesheet" href="/assets/css/core.css">
 
     <!-- STYLES -->
-    <link rel="stylesheet" type="text/css" href="/assets/lib/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/assets/lib/fancybox/jquery.fancybox.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/lib/toast/android_toast.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/lib/swipebox/css/swipebox.min.css" type="text/css">
     <link rel="stylesheet" href="style.css">
 
     <!-- SCRIPTS -->
     <script src="/assets/lib/toast/android_toast.min.js"></script>
     <script src="/assets/lib/scrollTo/jquery.scrollTo.min.js"></script>
     <script src="/assets/lib/fancybox/jquery.fancybox.min.js"></script>
+    <scrpit src="/assets/lib/swipebox/jquery.swipebox.min.js"></script>
 
     <!-- angularjs -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
@@ -59,7 +61,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-aquamarine" href="https://shardbytes.com:10099">Jenkins</a>
+                        <a class="nav-link" href="https://shardbytes.com:10099">Jenkins</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/ShardBytes">
@@ -76,20 +78,21 @@
     <div id="maincontent" class="container text-light">
 
         <p class="text-light mallana bigger">
-            We are a group of programmers from Slovakia and we try our best to make interesting applications, ranging from games to enterprise
-            software.
+          We are a group of programmers from Slovakia and we try our best to
+          make interesting applications, ranging from games to enterprise
+          software.
         </p>
 
         <h1 class="text-light mallana">
-            Check out our products:
+          Check out our products:
         </h1>
 
         <h4 class="text-light mallana">
           A Light in the Void
         </h4>
 
-        <a href="https://dummyimage.com/600x400/000/00ff2b.png" data-fancybox="alitv" data-caption="A Light in the Void #1">
-          <img src="https://dummyimage.com/100x67/000/00ff2b.png" alt=""/>
+        <a href="/assets/img/alitv-logo.png" class="swipebox" title="A Light in the Void #1">
+          <img src="/assets/img/alitv-logo-small.png" alt="image"/>
         </a>
 
         <a href="https://dummyimage.com/600x400/000/ffae00.png" data-fancybox="alitv" data-caption="A Light in the Void #2">
@@ -97,8 +100,8 @@
         </a>
 
         <p class="text-light mallana big">
-          Android(soon) and Browser game written in Java and HTML5 where you have
-          to destroy your enemies and get the last star.
+          Browser game written in Java backend and HTML5 frontend where you have
+          to destroy your enemies and gain the last living star in the universe.
         </p>
         <br>
 
@@ -115,8 +118,9 @@
         </a>
 
         <p class="text-light mallana big">
-          A simple book managing database software, that shows you who has which
-          book in a simple interface.
+          Library book management software for monitoring lend books and better
+          client experience. It uses QR codes to keep track of everything and
+          stores data in an easy to read XML database.
         </p>
         <br>
 
@@ -133,7 +137,8 @@
         </a>
 
         <p class="text-light mallana big">
-          One of our two timer apps, which we have made on request.
+          Simple custom timer application for android that has been
+          made per request.
         </p>
         <br>
 
@@ -150,7 +155,7 @@
         </a>
 
         <p class="text-light mallana big">
-          Our first (and probably last) attempt at making a game in Unity engine.
+          A (failed) attempt at making a game in Unity game engine.
         </p>
         <br>
 
@@ -158,7 +163,11 @@
     <!-- end maincontent -->
 
     <script src="scroll.js"></script>
-    <script src="index.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $(".swipebox").swipebox()
+    })
+    </script>
 
 </body>
 
