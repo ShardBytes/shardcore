@@ -1,14 +1,48 @@
 body, html{
   height: 100%;
   margin: 0;
+
 }
 
-.bigimage{
-  background-image: url("/assets/img/transplanetbig.png");
-  /* TODO: replace with an image of ourselves */
+.imageContainer img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto;
+
+}
+
+.imageContainer {
   height: 50%;
   /* TODO: check if 35-45% wouldn't look better */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+
+}
+
+.rounded img {
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+
+}
+
+.hover-glow {
+  transition: box-shadow ease 0.2s;
+
+}
+
+.hover-glow:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 247, 255, 0.85), 0 6px 20px 0 rgba(0, 255, 255, 0.66);
+  -webkit-transition: box-shadow ease 0.2s; /* Safari */
+  transition: box-shadow ease 0.2s;
+
+}
+
+.niceTextAlign {
+  width: 90%;
+  text-align: justify;
+
+}
+
+.splitTextTable {
+
 }

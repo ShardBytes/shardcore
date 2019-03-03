@@ -5,6 +5,7 @@
     <title>ShardBytes</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- chrome color -->
     <meta name="theme-color" content="#171718">
 
@@ -16,15 +17,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
     <!-- fontawesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <!-- core styles -->
     <link rel="stylesheet" href="/assets/css/core.css">
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="/assets/lib/fancybox/jquery.fancybox.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/lib/toast/android_toast.min.css" type="text/css">
     <link rel="stylesheet" href="/assets/lib/swipebox/css/swipebox.min.css" type="text/css">
     <link rel="stylesheet" href="style.css">
@@ -32,8 +32,7 @@
     <!-- SCRIPTS -->
     <script src="/assets/lib/toast/android_toast.min.js"></script>
     <script src="/assets/lib/scrollTo/jquery.scrollTo.min.js"></script>
-    <script src="/assets/lib/fancybox/jquery.fancybox.min.js"></script>
-    <scrpit src="/assets/lib/swipebox/jquery.swipebox.min.js"></script>
+    <scrpit src="/assets/lib/swipebox/js/jquery.swipebox.min.js"></script>
 
     <!-- angularjs -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
@@ -95,8 +94,8 @@
           <img src="/assets/img/alitv-logo-small.png" alt="image"/>
         </a>
 
-        <a href="https://dummyimage.com/600x400/000/ffae00.png" data-fancybox="alitv" data-caption="A Light in the Void #2">
-          <img src="https://dummyimage.com/100x67/000/ffae00.png" alt=""/>
+        <a href="https://dummyimage.com/600x400/000/ffae00.png" class="swipebox" title="A Light in the Void #2">
+          <img src="https://dummyimage.com/100x67/000/ffae00.png" alt="image"/>
         </a>
 
         <p class="text-light mallana big">
@@ -164,7 +163,7 @@
 
     <script src="scroll.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
+    jQuery(function($) {
       $(".swipebox").swipebox()
     })
     </script>
