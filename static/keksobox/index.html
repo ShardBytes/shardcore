@@ -24,6 +24,8 @@
   <!-- Custom styles for this template -->
   <link href="css/freelancer.min.css" rel="stylesheet">
 
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -42,7 +44,7 @@
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">O produkte</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Screenshoty</a>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#service">Služba</a>
           </li>
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Kontaktujte nás</a>
@@ -65,24 +67,78 @@
   <!-- About Section -->
   <section class="bg-primary text-white mb-0" id="about">
     <div class="container">
-      <h2 class="text-center text-uppercase text-white">Čo je keksobox?</h2>
+      <h2 class="text-center text-uppercase text-white">O produkte</h2>
       <hr class="star-light mb-5">
       <div class="row">
         <div class="col-lg-4 ml-auto">
           <p class="lead">
-            
+            Keksobox je elektronický systém e-shopu a donášky, ktorý je realizovaný prostredníctvom aplikácií pre Android a iOS. Na rozdiel od bežného internetového
+            e-shopu kladie dôraz na rýchlosť a efektívnosť predaja.
           </p>
         </div>
         <div class="col-lg-4 mr-auto">
           <p class="lead">
-
+            Produkt je určený pre firmy, ktoré podnikajú v školskom roku. Primárne bol dizajnovaný pre JA Firmy, ktoré majú záujem moderne a elektronicky predávať a donášať svoje
+            produkty zákazníkom. Je možné ho však využívať na predaj prakticky ľubovoľného tovaru.
           </p>
         </div>
       </div>
     </div>
+    <div class="container my-5 align-center">
+        <h2 class="text-center text-uppercase text-white">Ako to funguje?</h2>
+        <hr class="star-light mb-5">
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8 lead">
+            <ul>
+              <li>zaregistrujeme vašu firmu do systému a pomôžeme vám s jeho nastavením</li>
+              <li>pomocou appky si nastavíte ponuku produktov</li>
+              <li>po stiahnutí appky sa u vás zákazníci zaregistrujú a dobijú si kredit</li>
+              <li>objednajú si produkt a vy máte prehľad o objednávkach priamo vo vašej appke</li>
+              <li>pracovníci vašej firmy im tovar donesú a objednávku si overia naskenovaním QR kódu od zákazníka</li>
+            </ul>
+          </div>
+          <div class="col-lg-2"></div>
+        </div>
+      </div>
   </section>
 
-  <!-- Portfolio Grid Section -->
+  <section class="text-dark mb-0" id="service">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-dark">Služba</h2>
+        <hr class="star-dark mb-5">
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-8 lead">
+            <p></p>
+          </div>
+          <div class="col-lg-2"></div>
+        </div>
+      </div>
+  </section>
+
+  <section class="bg-primary text-white mb-0" id="contact">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-white">O produkte</h2>
+        <hr class="star-light mb-5">
+        <div class="row">
+          <div class="col-lg-4 ml-auto">
+            <p class="lead">
+              Keksobox je elektronický systém e-shopu a donášky, ktorý je realizovaný prostredníctvom aplikácií pre Android a iOS. Na rozdiel od bežného internetového
+              e-shopu kladie dôraz na rýchlosť a efektívnosť predaja.
+            </p>
+          </div>
+          <div class="col-lg-4 mr-auto">
+            <p class="lead">
+              Produkt je určený pre firmy, ktoré podnikajú v školskom roku. Primárne bol dizajnovaný pre JA Firmy, ktoré majú záujem moderne a elektronicky predávať a donášať svoje
+              produkty zákazníkom. Je možné ho však využívať na predaj prakticky ľubovoľného tovaru.
+            </p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Portfolio Grid Section 
   <section class="portfolio" id="portfolio">
       <div class="container">
         <h2 class="text-center text-uppercase text-secondary mb-0">Čo vám Keksobox dá?</h2>
@@ -152,16 +208,16 @@
         </div>
       </div>
     </section>
+    -->
 
-  <!-- Contact Section -->
+
+  <!-- Contact Section 
   <section id="contact">
     <div class="container">
       <h2 class="text-center text-uppercase text-secondary mb-0">Contact Me</h2>
       <hr class="star-dark mb-5">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-          <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
           <form name="sentMessage" id="contactForm" novalidate="novalidate">
             <div class="control-group">
               <div class="form-group floating-label-form-group controls mb-0 pb-2">
@@ -193,27 +249,28 @@
             </div>
             <br>
             <div id="success"></div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
-            </div>
           </form>
+          <button class="btn btn-primary btn-xl" id="sendMessageButtonBlyat">Odoslať</button>
         </div>
       </div>
     </div>
   </section>
+-->
 
   <!-- Footer -->
   <footer class="footer text-center">
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Location</h4>
-          <p class="lead mb-0">2215 John Daniel Drive
-            <br>Clark, MO 65243</p>
+          <h4 class="text-uppercase mb-4">Firma gyMind</h4>
+          <p class="lead mb-0">pri Gymnáziu, Komenského 13,
+            <br>082 71 Lipany, Slovensko</p>
         </div>
         <div class="col-md-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase mb-4">Around the Web</h4>
+          <h4 class="text-uppercase mb-4">Kontakt</h4>
           <ul class="list-inline mb-0">
+            Napíšte nám na <a href="mailto:firmagymind@gmail.com">firmagymind@gmail.com</a>
+            <!--
             <li class="list-inline-item">
               <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
                 <i class="fab fa-fw fa-facebook-f"></i>
@@ -239,12 +296,8 @@
                 <i class="fab fa-fw fa-dribbble"></i>
               </a>
             </li>
+            -->
           </ul>
-        </div>
-        <div class="col-md-4">
-          <h4 class="text-uppercase mb-4">About Freelancer</h4>
-          <p class="lead mb-0">Freelance is a free to use, open source Bootstrap theme created by
-            <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
         </div>
       </div>
     </div>
@@ -252,7 +305,7 @@
 
   <div class="copyright py-4 text-center text-white">
     <div class="container">
-      <small>Copyright &copy; Your Website 2019</small>
+      <small>Copyright &copy; gyMind 2019, &copy; ShardBytes 2019</small>
     </div>
   </div>
 
@@ -406,12 +459,12 @@
   <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
   <!-- Contact Form JavaScript -->
-  <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
+  <!--<script src="js/jqBootstrapValidation.js"></script>-->
+  <!--<script src="js/contact_me.js"></script>-->
 
   <!-- Custom scripts for this template -->
   <script src="js/freelancer.min.js"></script>
-
+  <script src="kokot.js"></script>
 </body>
 
 </html>
