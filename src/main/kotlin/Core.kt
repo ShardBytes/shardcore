@@ -17,6 +17,7 @@ import logintest.UserCore
 import logintest.UserRestPost
 import net.dv8tion.jda.core.AccountType
 import net.dv8tion.jda.core.JDABuilder
+import org.eclipse.jetty.http.MimeTypes
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.ServerConnector
 import org.eclipse.jetty.util.ssl.SslContextFactory
@@ -147,6 +148,19 @@ class CoreServer(private val config: CoreConfig,
 				post("logintest/:command", UserRestPost(userCore))
 				
 				ws("", RootEchoWS())
+				
+				
+				// APPLE AAAAAAAAAAAAAAAAAA SHIT....
+				get(".well-known/apple-app-site-association") {
+					it.contentType(MimeTypes.Type.APPLICATION_JSON.asString())
+					it.result("""
+						{
+						    "webcredentials": {
+						        "apps": ["82D59K3P3G.com.shardbytes.keksobox"]
+						    }
+						}
+					""".trimIndent())
+				}
 				
 			}
 			
