@@ -2,6 +2,8 @@
 
 [![](https://shardbytes.com/assets/img/transplanetcut.png)](https://shardbytes.com)
 
+## NOTE: this server is no longer in use, we use Shardium private TypeScript stack now
+
 ## Welcome, my dude
 # ShardCore = our main JVM server for our page, also basically our VPS idk
 # this also includes notes for setting up the whole vps
